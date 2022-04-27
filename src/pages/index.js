@@ -1,5 +1,5 @@
-import Home from "./Home";
+import Landing from "./Landing";
 import MockAPI from "./MockAPI";
-import Notes from "./Notes";
+import Home from "./Home";
 
-export { Home, MockAPI, Notes };
+export { Home, MockAPI, Landing };

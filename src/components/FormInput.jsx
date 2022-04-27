@@ -1,5 +1,5 @@
 import React from "react";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "../icons";
 import { useToggle } from "../Hooks";
 
 function FormInput({
@@ -9,6 +9,7 @@ function FormInput({
   onChange,
   styles = "",
   type = "text",
+  maxLength = "100",
 }) {
   const { toggle: visible, setToggle: setVisible } = useToggle(false);
 
@@ -35,6 +36,7 @@ function FormInput({
           value={value}
           onChange={onChange}
           autoComplete="on"
+          maxLength={maxLength}
         />
         {visibilityIcon}
       </span>
@@ -46,11 +48,12 @@ function FormInput({
         value={value}
         onChange={onChange}
         autoComplete="on"
+        maxLength={maxLength}
       />
     );
 
   return (
-    <fieldset className="flex w-full flex-col items-center">
+    <fieldset className="flex w-full flex-col items-center text-black">
       <legend className="text-md pl-3 mb-1">{legend}</legend>
       {input}
     </fieldset>
