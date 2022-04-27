@@ -7,10 +7,14 @@ const signup = async (requestBody, dispatcher) => {
       url: "/api/auth/signup",
       data: requestBody,
     });
-
+    localStorage.setItem("token", response.data.encodedToken);
+    console.log(response);
     dispatcher({
       type: "SIGNUP",
-      payload: { user: response.data.user, token: response.data.token },
+      payload: {
+        user: response.data.createdUser,
+        token: response.data.encodedToken,
+      },
     });
     return "SUCCESS";
   } catch (e) {
@@ -27,9 +31,13 @@ const login = async (requestBody, dispatcher) => {
       url: "/api/auth/login",
       data: requestBody,
     });
+    localStorage.setItem("token", response.data.encodedToken);
     dispatcher({
       type: "LOGIN",
-      payload: { user: response.data.user, token: response.data.token },
+      payload: {
+        user: response.data.foundUser,
+        token: response.data.encodedToken,
+      },
     });
     return "SUCCESS";
   } catch (e) {
