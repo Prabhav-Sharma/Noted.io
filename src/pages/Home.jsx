@@ -1,52 +1,72 @@
-import React from "react";
-import { AuthModal } from "../components";
-import { useToggle } from "../Hooks";
+import React, { useState } from "react";
+import { FaHome, FaTrash, CgProfile, MdLabel, MdArchive } from "../icons";
+import { LogoutBtn, Notes } from "../components";
+import { addToNotes } from "../services";
 import { useAuth } from "../contexts/providers/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { useUserData } from "../contexts/providers/userDataProvider";
 
 function Home() {
-  const { toggle: authModalToggle, setToggle: setAuthModalToggle } =
-    useToggle();
-
   const {
-    authState: { isAuthenticated },
+    authState: { token },
   } = useAuth();
+  const { userDataDispatch } = useUserData();
 
-  const navigate = useNavigate();
+  const [{ display, content }, setContent] = useState({
+    display: "HOME",
+    content: <Notes />,
+  });
 
-  const CTAButton = isAuthenticated ? (
-    <button
-      className="p-3 w-32 sm:w-36 md:w-44 2xl:w-48 text-base sm:text-lg md:text-xl font-normal ease-in-out duration-300 font-notoSans hover:bg-cyan-600 bg-cyan-500 rounded-lg text-white"
-      onClick={() => navigate("/notes")}
-    >
-      Start Writing..
-    </button>
-  ) : (
-    <button
-      className="p-3 w-32 sm:w-36 md:w-44 2xl:w-48 text-base sm:text-lg md:text-xl font-normal ease-in-out duration-300 font-notoSans hover:bg-cyan-600 bg-cyan-500 rounded-lg text-white"
-      onClick={() => setAuthModalToggle(true)}
-    >
-      Get Started
-    </button>
-  );
+  const addNewNoteHandler = () => {
+    addToNotes(
+      {
+        note: {
+          title: "New note",
+          text: "Start writing...",
+          color: "#BDC4DB",
+          pinned: false,
+          labels: [],
+        },
+      },
+      token,
+      userDataDispatch
+    );
+  };
+
+  const tabButtonStyles =
+    "flex flex-row gap-2 text-lg sm:text-xl items-center text-black hover:text-cyan-700";
   return (
     <>
-      <AuthModal show={{ authModalToggle, setAuthModalToggle }} />
-      <main
-        id="home"
-        className="flex flex-col md:flex-row bg-indigo-50 justify-around items-center"
-      >
-        <div className="flex flex-col gap-8 items-center">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl 2xl:text-5xl font-caveat animate-bounce">
-            Taking notes has never been easier!
-          </h1>
-          {CTAButton}
-        </div>
-        <img
-          className="w-3/5 md:w-2/6 lg:w-2/5"
-          src="https://res.cloudinary.com/carsmart/image/upload/v1649929257/Notes/undraw_notebook_re_id0r_1_w03pep.svg"
-        />
+      <main className="flex flex-col gap-4 bg-indigo-50 sm:flex-row sm:p-1 max-w-full md:pt-6 sm:gap-6 md:gap-8 h-full">
+        <aside className="flex static bg-transparent sm:relative sm:rounded-xl left-1 sm:ml-8 sm:w-56 md:w-72 lg:w-80 sm:items-start sm:h-auto sm:gap-6 p-3 top-0 flex-col gap-2">
+          <button
+            className={`${tabButtonStyles} ${
+              display === "HOME" && "text-cyan-700"
+            }`}
+          >
+            <FaHome className="align-sub text-xl" /> Home
+          </button>
+          <button className="flex flex-row gap-2 text-lg sm:text-xl items-center text-black hover:text-cyan-700">
+            <MdLabel className="align-sub text-xl" /> Labels
+          </button>
+          <button className="flex flex-row gap-2 text-lg sm:text-xl items-center text-black hover:text-cyan-700">
+            <MdArchive className="align-sub text-xl" /> Archives
+          </button>
+          <button className="flex flex-row gap-2 text-lg sm:text-xl items-center text-black hover:text-cyan-700">
+            <FaTrash className="align-sub text-lg" /> Trash
+          </button>
+          <button className="flex flex-row gap-2 text-lg sm:text-xl items-center text-black hover:text-cyan-700">
+            <CgProfile className="align-sub text-xl" /> Profile
+          </button>
+          <button
+            onClick={addNewNoteHandler}
+            className="p-3 w-48 text-sm sm:w-44 lg:text-xl lg:w-48 sm:text-lg ease-in-out font-notoSans font-light hover:bg-cyan-600 bg-cyan-500 rounded-lg text-white"
+          >
+            Create new note
+          </button>
+        </aside>
+        {content}
       </main>
+      <LogoutBtn />
     </>
   );
 }

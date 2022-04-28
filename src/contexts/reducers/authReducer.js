@@ -1,8 +1,7 @@
 const authReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-    case "SIGN UP":
-      console.log("remove from auth reducer");
+    case "SIGNUP":
       return {
         ...state,
         token: action.payload.token,

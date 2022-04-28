@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { GrClose } from "react-icons/gr";
-import { RiLoaderFill } from "react-icons/ri";
+import { GrClose, RiLoaderFill } from "../icons";
 import { useAuthForm, useToggle } from "../Hooks";
 import { login, signup } from "../services";
 import { useAuth } from "../contexts/providers/AuthProvider";
@@ -44,7 +43,7 @@ function AuthModal({ show }) {
     setAuthButtonToggle(true);
     const status = await login({ email, password }, authDispatch);
     setAuthButtonToggle(false);
-    status === "SUCCESS" && navigate("/notes");
+    status === "SUCCESS" && navigate("/home");
   };
 
   const loginWithTestCredentials = async (e) => {
@@ -55,7 +54,7 @@ function AuthModal({ show }) {
       authDispatch
     );
     setTestCredentialsToggle(false);
-    status === "SUCCESS" && navigate("/notes");
+    status === "SUCCESS" && navigate("/home");
   };
 
   const signupHandler = async (e) => {
@@ -77,14 +76,14 @@ function AuthModal({ show }) {
     setAuthButtonToggle(true);
     const status = await signup({ fullName, email, password }, authDispatch);
     setAuthButtonToggle(false);
-    status && navigate("/notes");
+    status === "SUCCESS" && navigate("/home");
   };
 
   const actionButtons =
     display === "LOGIN" ? (
       <>
         <button
-          className="w-full flex justify-center bg-cyan-500 p-1 md:text-lg text-white rounded-md hover:bg-cyan-600"
+          className="w-full flex justify-center bg-cyan-500 p-1 mt-1 md:text-lg text-white rounded-md hover:bg-cyan-600"
           onClick={loginHandler}
         >
           {authButtonToggle ? (
@@ -94,7 +93,7 @@ function AuthModal({ show }) {
           )}
         </button>
         <button
-          className="w-full flex justify-center bg-white border border-solid border-cyan-500 p-1  md:text-lg text-slate-800 rounded-md hover:bg-slate-200"
+          className="w-full flex justify-center bg-white border border-solid mt-1 border-cyan-500 p-1  md:text-lg text-slate-800 rounded-md hover:bg-slate-200"
           onClick={loginWithTestCredentials}
         >
           {testCredentialsToggle ? (
@@ -106,7 +105,7 @@ function AuthModal({ show }) {
       </>
     ) : (
       <button
-        className="w-full flex justify-center bg-cyan-500 p-1 md:text-lg text-white rounded-md hover:bg-cyan-600"
+        className="w-full flex justify-center bg-cyan-500 p-1 md:text-lg mt-1 text-white rounded-md hover:bg-cyan-600"
         onClick={signupHandler}
       >
         {authButtonToggle ? (
