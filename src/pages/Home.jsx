@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaHome, FaTrash, CgProfile, MdLabel, MdArchive } from "../icons";
-import { LogoutBtn, Notes } from "../components";
+import { Archives, LogoutBtn, Notes } from "../components";
 import { addToNotes } from "../services";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useUserData } from "../contexts/providers/userDataProvider";
@@ -30,6 +30,7 @@ function Home() {
       token,
       userDataDispatch
     );
+    if (display !== "HOME") setContent({ display: "HOME", content: <Notes /> });
   };
 
   const tabButtonStyles =
@@ -42,13 +43,29 @@ function Home() {
             className={`${tabButtonStyles} ${
               display === "HOME" && "text-cyan-700"
             }`}
+            onClick={() =>
+              setContent({
+                display: "HOME",
+                content: <Notes />,
+              })
+            }
           >
             <FaHome className="align-sub text-xl" /> Home
           </button>
           <button className="flex flex-row gap-2 text-lg sm:text-xl items-center text-black hover:text-cyan-700">
             <MdLabel className="align-sub text-xl" /> Labels
           </button>
-          <button className="flex flex-row gap-2 text-lg sm:text-xl items-center text-black hover:text-cyan-700">
+          <button
+            className={`${tabButtonStyles} ${
+              display === "ARCHIVES" && "text-cyan-700"
+            }`}
+            onClick={() =>
+              setContent({
+                display: "ARCHIVES",
+                content: <Archives />,
+              })
+            }
+          >
             <MdArchive className="align-sub text-xl" /> Archives
           </button>
           <button className="flex flex-row gap-2 text-lg sm:text-xl items-center text-black hover:text-cyan-700">
