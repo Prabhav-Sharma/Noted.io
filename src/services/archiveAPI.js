@@ -78,9 +78,29 @@ const deleteFromArchives = async (id, token, dispatcher) => {
   }
 };
 
+const updateArchiveNote = async (id, requestBody, token, dispatcher) => {
+  try {
+    const response = await axios({
+      method: "POST",
+      url: `/api/archives/${id}`,
+      headers: { authorization: token },
+      data: requestBody,
+    });
+    dispatcher({
+      type: "UPDATE_ARCHIVES",
+      payload: { archives: response.data.archives },
+    });
+    return "SUCCESS";
+  } catch (e) {
+    console.log(e);
+    return "FAILURE";
+  }
+};
+
 export {
   fetchArchives,
   addToArchives,
   deleteFromArchives,
   restoreFromArchives,
+  updateArchiveNote,
 };

@@ -5,6 +5,7 @@ import {
   addToArchives,
   deleteFromArchives,
   restoreFromArchives,
+  updateArchiveNote,
 } from "./archiveAPI";
 
 export {
@@ -18,4 +19,5 @@ export {
   addToArchives,
   deleteFromArchives,
   restoreFromArchives,
+  updateArchiveNote,
 };
