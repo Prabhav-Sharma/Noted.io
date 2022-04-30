@@ -83,7 +83,7 @@ function AuthModal({ show }) {
     display === "LOGIN" ? (
       <>
         <button
-          className="w-full flex justify-center bg-cyan-500 p-1 mt-1 md:text-lg text-white rounded-md hover:bg-cyan-600"
+          className="w-11/12 flex self-center justify-center bg-cyan-500 p-1.5 py-2 mt-1 md:text-lg text-white hover:bg-cyan-600"
           onClick={loginHandler}
         >
           {authButtonToggle ? (
@@ -93,7 +93,7 @@ function AuthModal({ show }) {
           )}
         </button>
         <button
-          className="w-full flex justify-center bg-white border border-solid mt-1 border-cyan-500 p-1  md:text-lg text-slate-800 rounded-md hover:bg-slate-200"
+          className="w-11/12 flex self-center justify-center bg-white border border-solid mt-1 border-cyan-500 p-1.5  py-2  md:text-lg text-slate-800 hover:bg-slate-200"
           onClick={loginWithTestCredentials}
         >
           {testCredentialsToggle ? (
@@ -105,7 +105,7 @@ function AuthModal({ show }) {
       </>
     ) : (
       <button
-        className="w-full flex justify-center bg-cyan-500 p-1 md:text-lg mt-1 text-white rounded-md hover:bg-cyan-600"
+        className="w-11/12 flex self-center justify-center bg-cyan-500 p-1.5  py-2 md:text-lg mt-1 text-white  hover:bg-cyan-600"
         onClick={signupHandler}
       >
         {authButtonToggle ? (

@@ -25,7 +25,7 @@ function FormInput({
     />
   );
 
-  const classNames = `rounded-md pl-2 p-1 border-slate-400 border-solid border-2 ${styles}`;
+  const classNames = `rounded-md pl-2 p-1.5 bg-gray-100 border-slate-400 border-solid border-2 ${styles}`;
   const input =
     type === "password" ? (
       <span className="w-11/12 relative">
