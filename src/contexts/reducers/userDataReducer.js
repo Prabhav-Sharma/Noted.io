@@ -3,7 +3,7 @@ const userDataReducer = (state, action) => {
     case "UPDATE_NOTES":
       return { ...state, notes: action.payload.notes };
     case "UPDATE_ARCHIVES":
-      return { ...state, archive: action.payload.archives };
+      return { ...state, archives: action.payload.archives };
     default:
       console.log("Remove from userDataReducer");
       return state;
