@@ -1,6 +1,6 @@
 import { FaHome, FaTrash, FaSave } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
-import { MdLabel, MdArchive } from "react-icons/md";
+import { MdLabel, MdArchive, MdUnarchive } from "react-icons/md";
 import { IoMdColorPalette, IoMdTrash } from "react-icons/io";
 import { BsPinFill } from "react-icons/bs";
 import { GiNotebook } from "react-icons/gi";
@@ -23,4 +23,5 @@ export {
   AiOutlineEyeInvisible,
   GrClose,
   RiLoaderFill,
+  MdUnarchive,
 };
