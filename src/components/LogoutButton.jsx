@@ -2,8 +2,9 @@ import React from "react";
 import { MdLogout } from "react-icons/md";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import { useUserData } from "../contexts/providers/userDataProvider";
 
-function LogoutBtn({ styles = "" }) {
+function LogoutButton({ styles = "" }) {
   const {
     authState: {
       isAuthenticated,
@@ -11,10 +12,13 @@ function LogoutBtn({ styles = "" }) {
     },
     authDispatch,
   } = useAuth();
+
+  const { userDataDispatch } = useUserData();
   const navigate = useNavigate();
 
   const logout = () => {
     authDispatch({ type: "LOGOUT" });
+    userDataDispatch({ type: "RESET" });
     navigate("/");
   };
 
@@ -32,4 +36,4 @@ function LogoutBtn({ styles = "" }) {
   );
 }
 
-export default LogoutBtn;
+export default LogoutButton;
