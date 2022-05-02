@@ -7,6 +7,7 @@ import { GiNotebook } from "react-icons/gi";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { GrClose } from "react-icons/gr";
 import { RiLoaderFill } from "react-icons/ri";
+import { ImSearch } from "react-icons/im";
 
 export {
   FaHome,
@@ -24,4 +25,5 @@ export {
   GrClose,
   RiLoaderFill,
   MdUnarchive,
+  ImSearch,
 };
