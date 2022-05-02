@@ -8,6 +8,13 @@ import {
   updateArchiveNote,
 } from "./archiveAPI";
 
+import {
+  fetchTrash,
+  restoreFromTrash,
+  addToTrash,
+  removeFromTrash,
+} from "./trashAPI";
+
 export {
   login,
   signup,
@@ -20,4 +27,8 @@ export {
   deleteFromArchives,
   restoreFromArchives,
   updateArchiveNote,
+  fetchTrash,
+  restoreFromTrash,
+  addToTrash,
+  removeFromTrash,
 };

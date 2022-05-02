@@ -7,6 +7,7 @@ const UserDataProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userDataReducer, {
     notes: [],
     archives: [],
+    trash: [],
   });
 
   return (

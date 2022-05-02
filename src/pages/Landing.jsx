@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthModal, LogoutBtn } from "../components";
+import { AuthModal, LogoutButton } from "../components";
 import { useToggle } from "../Hooks";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
@@ -47,7 +47,7 @@ function Landing() {
           src="https://res.cloudinary.com/carsmart/image/upload/v1649929257/Notes/undraw_notebook_re_id0r_1_w03pep.svg"
         />
       </main>
-      <LogoutBtn />
+      <LogoutButton />
     </>
   );
 }

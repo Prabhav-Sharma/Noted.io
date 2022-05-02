@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaHome, FaTrash, CgProfile, MdLabel, MdArchive } from "../icons";
-import { Archives, LogoutBtn, Notes } from "../components";
+import { Archives, LogoutButton, Notes, Trash } from "../components";
 import { addToNotes } from "../services";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useUserData } from "../contexts/providers/userDataProvider";
@@ -68,7 +68,12 @@ function Home() {
           >
             <MdArchive className="align-sub text-xl" /> Archives
           </button>
-          <button className="flex flex-row gap-2 text-lg sm:text-xl items-center text-black hover:text-cyan-700">
+          <button
+            className={`${tabButtonStyles} ${
+              display === "TRASH" && "text-cyan-700"
+            }`}
+            onClick={() => setContent({ display: "TRASH", content: <Trash /> })}
+          >
             <FaTrash className="align-sub text-lg" /> Trash
           </button>
           <button className="flex flex-row gap-2 text-lg sm:text-xl items-center text-black hover:text-cyan-700">
@@ -83,7 +88,7 @@ function Home() {
         </aside>
         {content}
       </main>
-      <LogoutBtn />
+      <LogoutButton />
     </>
   );
 }

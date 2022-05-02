@@ -2,20 +2,28 @@ import AuthModal from "./AuthModal";
 import FormInput from "./FormInput";
 import NoteCard from "./NoteCard";
 import Navigation from "./Navigation";
-import LogoutBtn from "./LogoutBtn";
+import LogoutButton from "./LogoutButton";
 import Notes from "./Notes";
 import Archives from "./Archives";
 import ColorButton from "./NoteActionButtons/ColorButton";
 import LabelButton from "./NoteActionButtons/LabelButton";
+import DeleteButton from "./NoteActionButtons/DeleteButton";
+import ArchiveButton from "./NoteActionButtons/ArchiveButton";
+import SaveButton from "./NoteActionButtons/SaveButton";
+import Trash from "./Trash";
 
 export {
   AuthModal,
   FormInput,
   NoteCard,
   Navigation,
-  LogoutBtn,
+  LogoutButton,
   Notes,
   Archives,
   ColorButton,
+  DeleteButton,
   LabelButton,
+  ArchiveButton,
+  SaveButton,
+  Trash,
 };
