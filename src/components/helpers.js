@@ -57,18 +57,45 @@ const labelColors = [
 const getRandomColor = () =>
   labelColors[Math.floor(Math.random() * labelColors.length)];
 
-const notesWithSearchLabels = (arr, search) => {
+const searchQueryNotes = (arr, search, type) => {
   if (search.trim().length === 0 || arr.length === 0) return [];
 
-  return arr.reduce(
-    (acc, curr) =>
-      curr.labels.some((label) =>
-        label.text.toLowerCase().includes(search.toLowerCase())
-      )
-        ? [...acc, curr]
-        : acc,
-    []
-  );
+  switch (type) {
+    case "LABEL":
+      return arr.reduce(
+        (acc, curr) =>
+          curr.labels.some((label) =>
+            label.text.toLowerCase().includes(search.toLowerCase())
+          )
+            ? [...acc, curr]
+            : acc,
+        []
+      );
+    case "TITLE":
+      return arr.reduce(
+        (acc, curr) =>
+          curr.title.toLowerCase().includes(search.toLowerCase())
+            ? [...acc, curr]
+            : acc,
+        []
+      );
+
+    case "TEXT":
+      return arr.reduce(
+        (acc, curr) =>
+          curr.text.toLowerCase().includes(search.toLowerCase())
+            ? [...acc, curr]
+            : acc,
+        []
+      );
+  }
 };
 
-export { noteReducer, isBright, getRandomColor, notesWithSearchLabels };
+const toCamelCase = (str) =>
+  [...str].reduce(
+    (acc, curr, index) =>
+      index === 0 ? acc + curr.toUpperCase() : acc + curr.toLowerCase(),
+    ""
+  );
+
+export { noteReducer, isBright, getRandomColor, toCamelCase, searchQueryNotes };
