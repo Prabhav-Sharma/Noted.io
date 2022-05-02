@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import { FaHome, FaTrash, CgProfile, MdLabel, MdArchive } from "../icons";
-import { Archives, LogoutButton, Notes, Trash, Labels } from "../components";
+import {
+  FaHome,
+  FaTrash,
+  CgProfile,
+  MdLabel,
+  MdArchive,
+  ImSearch,
+} from "../icons";
+import { Archives, LogoutButton, Notes, Trash, Search } from "../components";
 import { addToNotes } from "../services";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useUserData } from "../contexts/providers/userDataProvider";
@@ -76,13 +83,13 @@ function Home() {
           </button>
           <button
             className={`${tabButtonStyles} ${
-              display === "LABELS" && "text-cyan-700"
+              display === "SEARCH" && "text-cyan-700"
             }`}
             onClick={() =>
-              setContent({ display: "LABELS", content: <Labels /> })
+              setContent({ display: "SEARCH", content: <Search /> })
             }
           >
-            <MdLabel className="align-sub text-xl" /> Labels
+            <ImSearch className="align-sub text-xl" /> Search
           </button>
           <button className="flex flex-row gap-2 text-lg sm:text-xl items-center text-black hover:text-cyan-700">
             <CgProfile className="align-sub text-xl" /> Profile
