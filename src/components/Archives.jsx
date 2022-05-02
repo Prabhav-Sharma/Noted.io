@@ -40,7 +40,7 @@ function Archives() {
   return (
     <section className="flex-grow flex flex-col gap-4 items-center m-0">
       <h1 className="self-start flex items-center gap-2 text-2xl pl-2 font-bold font-caveat sm:pl-6 sm:text-3xl md:pl-10">
-        <MdArchive /> Archives
+        Archives <MdArchive />
       </h1>
       {archiveNotes}
     </section>

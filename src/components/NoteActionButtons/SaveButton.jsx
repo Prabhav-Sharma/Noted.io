@@ -37,7 +37,7 @@ function SaveButton({
     <button
       onClick={updateNoteHandler}
       className={` ${saveToggle ? "block" : "hidden"}  
-  ${saveLoading && "animate-pulse-fast opacity-80"} ${
+  ${saveLoading && "animate-pulse-fast opacity-80 hover:cursor-progress"} ${
         brightness ? "bg-slate-700" : "bg-slate-100"
       } absolute bottom-5 left-4 flex items-center gap-2 p-1.5 md:text-lg hover:scale-110  duration-200 shadow-sm shadow-white rounded-md text-emerald-500`}
     >
