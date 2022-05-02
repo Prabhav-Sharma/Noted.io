@@ -10,6 +10,7 @@ import LabelButton from "./NoteActionButtons/LabelButton";
 import DeleteButton from "./NoteActionButtons/DeleteButton";
 import ArchiveButton from "./NoteActionButtons/ArchiveButton";
 import SaveButton from "./NoteActionButtons/SaveButton";
+import Labels from "./Labels";
 import Trash from "./Trash";
 
 export {
@@ -26,4 +27,5 @@ export {
   ArchiveButton,
   SaveButton,
   Trash,
+  Labels,
 };
