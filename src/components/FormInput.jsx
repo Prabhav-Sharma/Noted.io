@@ -10,6 +10,7 @@ function FormInput({
   styles = "",
   type = "text",
   maxLength = "100",
+  reference,
 }) {
   const { toggle: visible, setToggle: setVisible } = useToggle(false);
 
@@ -37,6 +38,7 @@ function FormInput({
           onChange={onChange}
           autoComplete="on"
           maxLength={maxLength}
+          ref={reference || null}
         />
         {visibilityIcon}
       </span>
@@ -49,6 +51,7 @@ function FormInput({
         onChange={onChange}
         autoComplete="on"
         maxLength={maxLength}
+        ref={reference || null}
       />
     );
 

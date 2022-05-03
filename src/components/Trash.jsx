@@ -23,7 +23,7 @@ function Trash() {
     trash.length === 0 ? (
       <div className="h-full flex flex-col justify-start mt-8 items-center gap-8">
         <h3 className="text-base font-bold sm:text-xl md:text-2xl font-caveat">
-          Your trash is our treasure, unless you don't want us to have it :-P
+          You can trash talk with me ^_^
         </h3>
         <h3 className="flex text-base sm:text-xl md:text-2xl font-bold font-caveat items-center">
           Click on the

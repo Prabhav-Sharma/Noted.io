@@ -24,7 +24,10 @@
     text-overflow: ellipsis;
 }
 
+html{
+accent-color: #94a3b8;
+}
+
 .animate-pulse-fast {
     animation: pulse 0.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
-

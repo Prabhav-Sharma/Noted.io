@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import { FaHome, FaTrash, CgProfile, MdLabel, MdArchive } from "../icons";
-import { Archives, LogoutButton, Notes, Trash } from "../components";
+import {
+  FaHome,
+  FaTrash,
+  CgProfile,
+  MdLabel,
+  MdArchive,
+  ImSearch,
+} from "../icons";
+import { Archives, LogoutButton, Notes, Trash, Search } from "../components";
 import { addToNotes } from "../services";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useUserData } from "../contexts/providers/userDataProvider";
@@ -52,9 +59,7 @@ function Home() {
           >
             <FaHome className="align-sub text-xl" /> Home
           </button>
-          <button className="flex flex-row gap-2 text-lg sm:text-xl items-center text-black hover:text-cyan-700">
-            <MdLabel className="align-sub text-xl" /> Labels
-          </button>
+
           <button
             className={`${tabButtonStyles} ${
               display === "ARCHIVES" && "text-cyan-700"
@@ -75,6 +80,16 @@ function Home() {
             onClick={() => setContent({ display: "TRASH", content: <Trash /> })}
           >
             <FaTrash className="align-sub text-lg" /> Trash
+          </button>
+          <button
+            className={`${tabButtonStyles} ${
+              display === "SEARCH" && "text-cyan-700"
+            }`}
+            onClick={() =>
+              setContent({ display: "SEARCH", content: <Search /> })
+            }
+          >
+            <ImSearch className="align-sub text-xl" /> Search
           </button>
           <button className="flex flex-row gap-2 text-lg sm:text-xl items-center text-black hover:text-cyan-700">
             <CgProfile className="align-sub text-xl" /> Profile

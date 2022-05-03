@@ -42,7 +42,7 @@ function isBright(hex) {
   const green = parseInt(hex[3] + hex[4], 16);
   const blue = parseInt(hex[5] + hex[6], 16);
   const luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue; // taken and understood from stackoverflow
-  return luminance > 50 ? true : false;
+  return luminance > 70 ? true : false;
 }
 
 const labelColors = [
@@ -57,4 +57,45 @@ const labelColors = [
 const getRandomColor = () =>
   labelColors[Math.floor(Math.random() * labelColors.length)];
 
-export { noteReducer, isBright, getRandomColor };
+const searchQueryNotes = (arr, search, type) => {
+  if (search.trim().length === 0 || arr.length === 0) return [];
+
+  switch (type) {
+    case "LABEL":
+      return arr.reduce(
+        (acc, curr) =>
+          curr.labels.some((label) =>
+            label.text.toLowerCase().includes(search.toLowerCase())
+          )
+            ? [...acc, curr]
+            : acc,
+        []
+      );
+    case "TITLE":
+      return arr.reduce(
+        (acc, curr) =>
+          curr.title.toLowerCase().includes(search.toLowerCase())
+            ? [...acc, curr]
+            : acc,
+        []
+      );
+
+    case "TEXT":
+      return arr.reduce(
+        (acc, curr) =>
+          curr.text.toLowerCase().includes(search.toLowerCase())
+            ? [...acc, curr]
+            : acc,
+        []
+      );
+  }
+};
+
+const toCamelCase = (str) =>
+  [...str].reduce(
+    (acc, curr, index) =>
+      index === 0 ? acc + curr.toUpperCase() : acc + curr.toLowerCase(),
+    ""
+  );
+
+export { noteReducer, isBright, getRandomColor, toCamelCase, searchQueryNotes };
