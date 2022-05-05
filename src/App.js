@@ -1,11 +1,11 @@
 import "./App.css";
-import { Navigation } from "./components";
+import { TopBar, LogoutButton } from "./components";
 import Router from "./router/Router";
 
 function App() {
   return (
     <div className="App">
-      <Navigation />
+      <TopBar />
       <Router />
     </div>
   );

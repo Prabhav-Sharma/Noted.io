@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-function Navigation() {
+import { LogoutButton } from ".";
+function TopBar() {
   return (
     <nav className="p-1 pb-2 bg-stone-900 w-full ">
       <Link to="/">
@@ -10,8 +11,9 @@ function Navigation() {
           alt="Noted.io"
         />
       </Link>
+      <LogoutButton />
     </nav>
   );
 }
 
-export default Navigation;
+export default TopBar;
