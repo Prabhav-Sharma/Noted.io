@@ -16,6 +16,19 @@ const fetchNotes = async (token, dispatcher) => {
   }
 };
 
+const fetchNote = async (noteId, type, token, dispatcher) => {
+  try {
+    const response = await axios({
+      method: "GET",
+      url: `/api/note/${type}/${noteId}`,
+      headers: { authorization: token },
+    });
+    dispatcher({ type: "NOTE", payload: { note: response.data.note } });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 //add Note
 const addToNotes = async (requestBody, token, dispatcher) => {
   try {
@@ -71,4 +84,4 @@ const deleteNote = async (id, token, dispatcher) => {
   }
 };
 
-export { fetchNotes, addToNotes, updateNote, deleteNote };
+export { fetchNotes, addToNotes, updateNote, deleteNote, fetchNote };
