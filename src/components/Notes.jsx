@@ -24,7 +24,7 @@ function Notes() {
           {
             note: {
               title: "New note",
-              text: "Start writing...",
+              text: "<p>Start writing...</p>",
               color: "#BDC4DB",
               pinned: false,
               labels: [],
@@ -58,7 +58,7 @@ function Notes() {
         <GiNotebook /> All Notes
       </h2>
       {allNotes.map((note) => (
-        <NoteCard key={note._id} note={note} />
+        <NoteCard key={note._id} note={note} type="HOME" />
       ))}
     </>
   );

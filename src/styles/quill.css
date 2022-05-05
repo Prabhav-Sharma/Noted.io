@@ -1,0 +1,50 @@
+    .ql-container.ql-snow {
+    padding-top: 3rem;
+    border: none;
+    flex-grow: 1;
+    display: flex;
+    background-color: rgb(238 242 255);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    padding-bottom: 2rem;
+  }
+
+  .quill {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-grow: 1;
+    min-height: 60vh;  
+  }
+
+  .ql-toolbar {
+    background-color: #292524;
+  }
+  
+  .ql-toolbar button .ql-fill {
+    fill: white;
+  }
+  
+  .ql-toolbar button .ql-stroke, .ql-picker-label .ql-stroke {
+    stroke: white;
+  }
+  
+  .ql-picker-label, .ql-picker-label:hover {
+    color:white;
+  }
+
+  .label{
+    bottom: 6rem;
+  }
+
+@media only screen and (max-width:335px) {
+  .label{
+  bottom: 8rem;
+}
+}
+
+@media only screen and (min-width:548px) {
+  .label{
+    bottom: 4rem;
+  }
+}
+

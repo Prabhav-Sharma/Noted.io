@@ -17,7 +17,7 @@ const noteReducer = (state, action) => {
     case "NOTE_COLOR":
       return {
         ...state,
-        note: { ...state.note, noteColor: action.payload.noteColor },
+        note: { ...state.note, color: action.payload.noteColor },
       };
 
     case "LABEL_TOGGLE":
@@ -98,4 +98,35 @@ const toCamelCase = (str) =>
     ""
   );
 
-export { noteReducer, isBright, getRandomColor, toCamelCase, searchQueryNotes };
+const notePageReducer = (state, action) => {
+  switch (action.type) {
+    case "TITLE":
+      return { ...state, note: { ...state.note, title: action.payload.title } };
+
+    case "TEXT":
+      return { ...state, note: { ...state.note, text: action.payload.text } };
+
+    case "NOTE":
+      return {
+        ...state,
+        note: action.payload.note,
+        initialNote: action.payload.note,
+      };
+    case "SAVE_TOGGLE":
+      return { ...state, saveToggle: action.payload.saveToggle };
+
+    case "SAVE_LOADING":
+      return { ...state, saveLoading: !state.saveLoading };
+
+    case "LABEL_TOGGLE":
+      return { ...state, labelToggle: !state.labelToggle };
+  }
+};
+export {
+  noteReducer,
+  isBright,
+  getRandomColor,
+  toCamelCase,
+  searchQueryNotes,
+  notePageReducer,
+};

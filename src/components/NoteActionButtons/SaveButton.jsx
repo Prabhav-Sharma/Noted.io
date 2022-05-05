@@ -7,11 +7,12 @@ import { updateArchiveNote, updateNote } from "../../services";
 function SaveButton({
   type,
   dispatch,
-  brightness,
+  brightness = true,
   note,
-  labelToggle,
+  labelToggle = false,
   saveToggle,
   saveLoading,
+  styles = "",
 }) {
   const {
     authState: { token },
@@ -39,7 +40,7 @@ function SaveButton({
       className={` ${saveToggle ? "block" : "hidden"}  
   ${saveLoading && "animate-pulse-fast opacity-80 hover:cursor-progress"} ${
         brightness ? "bg-slate-700" : "bg-slate-100"
-      } absolute bottom-5 left-4 flex items-center gap-2 p-1.5 md:text-lg hover:scale-110  duration-200 shadow-sm shadow-white rounded-md text-emerald-500`}
+      } ${styles} absolute text-base flex items-center gap-2 p-1.5 md:text-lg hover:scale-110 duration-200 shadow-sm shadow-white rounded-md text-emerald-500`}
     >
       {saveLoading ? "Saving.." : "Save"}
       <FaSave className={`text-lg md:text-xl`} />

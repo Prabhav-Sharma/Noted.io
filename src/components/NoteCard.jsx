@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useMemo } from "react";
+import React, { useEffect, useReducer, useMemo, useRef } from "react";
 import { BsPinFill } from "../icons";
 import {
   ColorButton,
@@ -8,6 +8,8 @@ import {
   SaveButton,
 } from "../components";
 import { noteReducer, isBright } from "./helpers";
+import { useNavigate } from "react-router-dom";
+import DOMPurify from "dompurify";
 
 function NoteCard({ note, type = "HOME" }) {
   const [state, dispatch] = useReducer(noteReducer, {
@@ -19,13 +21,15 @@ function NoteCard({ note, type = "HOME" }) {
   });
 
   const {
-    note: { noteColor = "#BDC4DB", title, text, labels, _id, pinned },
+    note: { color = "#BDC4DB", title, text, labels, _id, pinned },
     labelToggle,
     saveToggle,
     saveLoading,
   } = state;
 
-  const brightness = useMemo(() => isBright(noteColor), [noteColor]);
+  const navigate = useNavigate();
+  const noteElementRef = useRef();
+  const brightness = useMemo(() => isBright(color), [color]);
 
   useEffect(() => {
     let noteChanged = JSON.stringify(state.note) !== JSON.stringify(note);
@@ -34,19 +38,30 @@ function NoteCard({ note, type = "HOME" }) {
 
   return (
     <div
-      className={`flex flex-col w-11/12 p-4 gap-2 relative md:w-4/5 ${
+      ref={noteElementRef}
+      className={`flex flex-col w-11/12 p-4 gap-2 relative md:w-4/5  cursor-pointer ${
         brightness ? "text-black" : "text-white"
       }`}
-      style={{ backgroundColor: noteColor }}
+      style={{ backgroundColor: color }}
+      onClick={(e) => {
+        e.target === noteElementRef.current && navigate(`/note/${type}/${_id}`);
+      }}
     >
-      <h3 className="font-neuton text-base md:text-xl font-medium">{title}</h3>
-      <p className="line-clamp-5 text-sm md:text-base font-merriWeather font-extralight">
-        {text}
-      </p>
-      <div className="flex flex-row justify-end align-center gap-2 md:gap-3">
+      <h3
+        className="font-neuton text-xl md:text-2xl font-medium"
+        onClick={() => navigate(`/note/${type}/${_id}`)}
+      >
+        {title}
+      </h3>
+      <p
+        className="line-clamp-5 text-sm md:text-base font-notoSans font-normal"
+        onClick={() => navigate(`/note/${type}/${_id}`)}
+        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(text) }}
+      ></p>
+      <div className="flex flex-row justify-end self-end align-center w-max gap-2 md:gap-3">
         {type !== "TRASH" && (
           <ColorButton
-            noteColor={noteColor}
+            noteColor={color}
             brightness={brightness}
             dispatch={dispatch}
           />
@@ -80,6 +95,7 @@ function NoteCard({ note, type = "HOME" }) {
         note={state.note}
         saveToggle={saveToggle}
         labelToggle={labelToggle}
+        styles="bottom-5 left-4"
       />
     </div>
   );

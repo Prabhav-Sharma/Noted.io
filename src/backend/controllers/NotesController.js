@@ -27,6 +27,41 @@ export const getAllNotesHandler = function (schema, request) {
 };
 
 /**
+ * This handler fetches a single note with the provided id in the db.
+ * send GET Request at /api/note/:type/:noteId
+ * */
+
+export const getNoteHandler = function (schema, request) {
+  const user = requiresAuth.call(this, request);
+  try {
+    if (!user) {
+      return new Response(
+        404,
+        {},
+        { errors: ["The email you entered is not registered. Not found error"] }
+      );
+    }
+    const { noteId, type } = request.params;
+    let note;
+    switch (type) {
+      case "HOME":
+        note = user.notes.filter((note) => note._id === noteId)[0];
+        break;
+      case "ARCHIVE":
+        note = user.archives.filter((note) => note._id === noteId)[0];
+        break;
+      case "TRASH":
+        note = user.trash.filter((note) => note._id === noteId)[0];
+        break;
+    }
+    if (note !== undefined) return new Response(201, {}, { note: note });
+    else throw error;
+  } catch (error) {
+    return new Response(500, {}, { error });
+  }
+};
+
+/**
  * This handler handles creating a new note
  * send POST Request at /api/notes
  * body contains {note}
