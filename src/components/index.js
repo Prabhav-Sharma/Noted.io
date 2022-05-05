@@ -1,7 +1,7 @@
 import AuthModal from "./AuthModal";
 import FormInput from "./FormInput";
 import NoteCard from "./NoteCard";
-import Navigation from "./Navigation";
+import TopBar from "./TopBar";
 import LogoutButton from "./LogoutButton";
 import Notes from "./Notes";
 import Archives from "./Archives";
@@ -17,7 +17,7 @@ export {
   AuthModal,
   FormInput,
   NoteCard,
-  Navigation,
+  TopBar,
   LogoutButton,
   Notes,
   Archives,
