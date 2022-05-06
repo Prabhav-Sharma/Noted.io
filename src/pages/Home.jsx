@@ -32,6 +32,7 @@ function Home() {
           color: getRandomColor(),
           pinned: false,
           labels: [],
+          createdAt: new Date(),
         },
       },
       token,
