@@ -45,17 +45,25 @@ function isBright(hex) {
   return luminance > 70 ? true : false;
 }
 
-const labelColors = [
+const colors = [
   "#E74B7F",
   "#89E6D8",
   "#32C356",
   "#E3D8F1",
   "#FDE74C",
   "#058ED9",
+  "#270F36",
+  "#632B6C",
+  "#C76B98",
+  "#F09F9C",
+  "#FCC3A3",
+  "#319B54",
+  "#244464",
+  "#477Eb6",
+  "#8E8E8E",
 ];
 
-const getRandomColor = () =>
-  labelColors[Math.floor(Math.random() * labelColors.length)];
+const getRandomColor = () => colors[Math.floor(Math.random() * colors.length)];
 
 const searchQueryNotes = (arr, search, type) => {
   if (search.trim().length === 0 || arr.length === 0) return [];

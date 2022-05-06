@@ -1,4 +1,5 @@
-import { useContext, createContext, useReducer } from "react";
+import { useContext, createContext, useReducer, useEffect } from "react";
+import { fetchUserDetails } from "../../services/authAPI";
 import { authReducer } from "../reducers/authReducer";
 
 const AuthContext = createContext(null);
@@ -10,6 +11,10 @@ const AuthProvider = ({ children }) => {
     token: token,
     isAuthenticated: token ? true : false,
   });
+
+  useEffect(() => {
+    token && fetchUserDetails(token, dispatch);
+  }, [token]);
 
   return (
     <AuthContext.Provider value={{ authState: state, authDispatch: dispatch }}>
