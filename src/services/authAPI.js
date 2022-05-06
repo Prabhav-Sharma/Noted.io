@@ -46,4 +46,17 @@ const login = async (requestBody, dispatcher) => {
   }
 };
 
-export { login, signup };
+const fetchUserDetails = async (token, dispatcher) => {
+  try {
+    const response = await axios({
+      method: "GET",
+      url: "/api/auth/user",
+      headers: { authorization: token },
+    });
+    dispatcher({ type: "USER", payload: { user: response.data.user } });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export { login, signup, fetchUserDetails };
