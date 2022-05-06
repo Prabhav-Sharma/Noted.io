@@ -3,6 +3,7 @@ import { useAuth } from "../contexts/providers/AuthProvider";
 import { useUserData } from "../contexts/providers/userDataProvider";
 import { BsPinFill, GiNotebook } from "../icons";
 import { addToNotes, fetchNotes } from "../services";
+import { getRandomColor } from "./helpers";
 import { NoteCard } from "./index";
 
 function Notes() {
@@ -23,9 +24,9 @@ function Notes() {
         addToNotes(
           {
             note: {
-              title: "New note",
-              text: "<p>Start writing...</p>",
-              color: "#BDC4DB",
+              title: "",
+              text: "<p><br></p>",
+              color: getRandomColor(),
               pinned: false,
               labels: [],
             },

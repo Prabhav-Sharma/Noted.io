@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import {
   FaHome,
   FaTrash,
-  CgProfile,
-  MdLabel,
+  GiPlagueDoctorProfile,
   MdArchive,
   ImSearch,
 } from "../icons";
-import { Archives, Notes, Trash, Search } from "../components";
+import { Archives, Notes, Trash, Search, Profile } from "../components";
 import { addToNotes } from "../services";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useUserData } from "../contexts/providers/userDataProvider";
+import { getRandomColor } from "../components/helpers";
 
 function Home() {
   const {
@@ -27,9 +27,9 @@ function Home() {
     addToNotes(
       {
         note: {
-          title: "New note",
-          text: "<p>Start writing...</p>",
-          color: "#BDC4DB",
+          title: "",
+          text: "<p><br></p>",
+          color: getRandomColor(),
           pinned: false,
           labels: [],
         },
@@ -88,8 +88,15 @@ function Home() {
         >
           <ImSearch className="align-sub text-xl" /> Search
         </button>
-        <button className="flex flex-row gap-2 text-lg sm:text-xl items-center text-black hover:text-cyan-700">
-          <CgProfile className="align-sub text-xl" /> Profile
+        <button
+          className={`${tabButtonStyles} ${
+            display === "PROFILE" && "text-cyan-700"
+          }`}
+          onClick={() =>
+            setContent({ display: "PROFILE", content: <Profile /> })
+          }
+        >
+          <GiPlagueDoctorProfile className="align-sub text-xl" /> Profile
         </button>
         <button
           onClick={addNewNoteHandler}
