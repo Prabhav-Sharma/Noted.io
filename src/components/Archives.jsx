@@ -31,7 +31,7 @@ function Archives() {
         </h3>
         <h3 className="flex text-base sm:text-xl md:text-2xl font-bold font-caveat items-center">
           Click on the
-          <MdArchive className="ml-1.5 mr-1" />
+          <MdArchive className="ml-1.5 mr-1 animate-bounce" />
           icon to archive notes
         </h3>
       </div>

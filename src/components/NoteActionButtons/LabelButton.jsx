@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MdLabel } from "../../icons";
 import { FormInput } from "../index";
-import { getRandomColor } from "../helpers";
+import { getRandomColor, isBright } from "../helpers";
 
 function LabelButton({ brightness, labels, labelToggle, dispatch }) {
   const [labelText, setLabelText] = useState("");
@@ -52,8 +52,10 @@ function LabelButton({ brightness, labels, labelToggle, dispatch }) {
             {labels.map((label) => (
               <div
                 key={label.text}
-                style={{ backgroundColor: label.color, color: "black" }}
-                className="p-1 px-2 flex justify-around items-center rounded-lg w-full "
+                style={{ backgroundColor: label.color }}
+                className={` ${
+                  isBright(label.color) ? "text-black" : "text-white"
+                } p-1 px-2 flex justify-around items-center rounded-lg w-full  `}
               >
                 {label.text}
                 <span

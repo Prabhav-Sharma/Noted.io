@@ -39,7 +39,7 @@ function NoteCard({ note, type = "HOME" }) {
   return (
     <div
       ref={noteElementRef}
-      className={`flex flex-col w-11/12 p-4 gap-2 relative md:w-4/5  cursor-pointer ${
+      className={`flex flex-col w-11/12 p-4 gap-2 relative md:w-4/5 rounded-lg cursor-pointer ${
         brightness ? "text-black" : "text-white"
       }`}
       style={{ backgroundColor: color }}
@@ -51,12 +51,16 @@ function NoteCard({ note, type = "HOME" }) {
         className="font-neuton text-xl md:text-2xl font-medium"
         onClick={() => navigate(`/note/${type}/${_id}`)}
       >
-        {title}
+        {title || "New Note"}
       </h3>
       <p
         className="line-clamp-5 text-sm md:text-base font-notoSans font-normal"
         onClick={() => navigate(`/note/${type}/${_id}`)}
-        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(text) }}
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(
+            text === "<p><br></p>" ? "<p>Start Writing...</p>" : text
+          ),
+        }}
       ></p>
       <div className="flex flex-row justify-end self-end align-center w-max gap-2 md:gap-3">
         {type !== "TRASH" && (

@@ -7,17 +7,17 @@ import {
   SaveButton,
   ArchiveButton,
 } from "../components";
-import { notePageReducer } from "../components/helpers";
+import { notePageReducer, isBright } from "../components/helpers";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { fetchNote } from "../services/notesAPI";
 import "../styles/quill.css";
 
 function Note() {
   const [state, dispatch] = useReducer(notePageReducer, {
-    note: { title: "New note", text: "<p>Start writing...</p>", labels: [] },
+    note: { title: "", text: "", labels: [] },
     initialNote: {
-      title: "New note",
-      text: "<p>Start writing...</p>",
+      title: "",
+      text: "",
       labels: [],
     },
     saveToggle: false,
@@ -99,6 +99,7 @@ function Note() {
           value={note.text}
           onChange={(e) => dispatch({ type: "TEXT", payload: { text: e } })}
           readOnly={type === "TRASH"}
+          placeholder="Start writing..."
         />
         <FormInput
           value={note.title}
@@ -122,13 +123,15 @@ function Note() {
         />
         <span className="absolute label left-2 flex flex-wrap gap-2">
           {note.labels.map((label) => (
-            <p
+            <span
               key={label.text}
               style={{ backgroundColor: label.color }}
-              className="px-2 p-1 text-black text-base font-normal rounded-md"
+              className={` ${
+                isBright(label.color) ? "text-black" : "text-white"
+              } px-2 p-1 text-base font-normal rounded-md`}
             >
               {label.text}
-            </p>
+            </span>
           ))}
         </span>
         <span
