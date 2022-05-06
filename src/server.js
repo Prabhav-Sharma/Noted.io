@@ -8,6 +8,7 @@ import {
 import {
   loginHandler,
   signupHandler,
+  getUserHandler,
 } from "./backend/controllers/AuthController";
 import {
   archiveNoteHandler,
@@ -54,6 +55,7 @@ export function makeServer({ environment = "development" } = {}) {
       // auth routes (public)
       this.post("/auth/signup", signupHandler.bind(this));
       this.post("/auth/login", loginHandler.bind(this));
+      this.get("/auth/user", getUserHandler.bind(this));
 
       // notes routes (private)
       this.get("/notes", getAllNotesHandler.bind(this));
