@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 //fetch notes
 const fetchNotes = async (token, dispatcher) => {
   try {
@@ -11,8 +12,11 @@ const fetchNotes = async (token, dispatcher) => {
       type: "UPDATE_NOTES",
       payload: { notes: response.data.notes },
     });
+    return "SUCCESS";
   } catch (e) {
     console.log(e);
+    toast.error("Hold up, can't find the notes!");
+    return "FAILURE";
   }
 };
 
@@ -26,6 +30,7 @@ const fetchNote = async (noteId, type, token, dispatcher) => {
     dispatcher({ type: "NOTE", payload: { note: response.data.note } });
   } catch (e) {
     console.log(e);
+    toast.error("This is weird, I can't access it!");
   }
 };
 
@@ -38,11 +43,14 @@ const addToNotes = async (requestBody, token, dispatcher) => {
       headers: { authorization: token },
       data: requestBody,
     });
+
     dispatcher({
       type: "UPDATE_NOTES",
       payload: { notes: response.data.notes },
     });
+    toast.success("New note created!");
   } catch (e) {
+    toast.error("Jonathan, stop playing the server!");
     console.log(e);
   }
 };
@@ -60,28 +68,13 @@ const updateNote = async (id, requestBody, token, dispatcher) => {
       type: "UPDATE_NOTES",
       payload: { notes: response.data.notes },
     });
+    toast.success("Changes Saved!");
     return "SUCCESS";
   } catch (e) {
     console.log(e);
+    toast.error("This is embarassing");
     return "FAILED";
   }
 };
-//deleteNote
-const deleteNote = async (id, token, dispatcher) => {
-  try {
-    const response = await axios({
-      method: "DELETE",
-      url: `/api/notes/${id}`,
-      headers: { authorization: token },
-    });
 
-    dispatcher({
-      type: "UPDATE_NOTES",
-      payload: { notes: response.data.notes },
-    });
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export { fetchNotes, addToNotes, updateNote, deleteNote, fetchNote };
+export { fetchNotes, addToNotes, updateNote, fetchNote };
