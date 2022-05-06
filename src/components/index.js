@@ -12,6 +12,7 @@ import ArchiveButton from "./NoteActionButtons/ArchiveButton";
 import SaveButton from "./NoteActionButtons/SaveButton";
 import Search from "./Search";
 import Trash from "./Trash";
+import Profile from "./Profile";
 
 export {
   AuthModal,
@@ -28,4 +29,5 @@ export {
   SaveButton,
   Trash,
   Search,
+  Profile,
 };
