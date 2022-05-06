@@ -108,7 +108,7 @@ function Search() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder={`🔍 Search for ${toCamelCase(searchType)}...`}
-        styles="self-center max-w-2xl bg-slate-900 text-white p-2 relative md:text-lg font-notoSans"
+        styles="self-center max-w-full bg-slate-900 text-white p-2 relative md:text-lg font-notoSans"
         maxLength="12"
       />
       {search.length !== 0 &&
