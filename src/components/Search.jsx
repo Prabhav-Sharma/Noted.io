@@ -72,7 +72,7 @@ function Search() {
       <h1 className="self-start flex items-center gap-1 text-2xl pl-2 font-bold font-caveat sm:pl-6 sm:text-3xl md:pl-10">
         Search <ImSearch className="rotate-90" />
       </h1>
-      <span className="flex items-center flex-wrap self-start font-notoSans text-base ml-2 sm:ml-10 gap-1 md:gap-2">
+      <span className="flex items-center flex-wrap self-start font-merriWeather text-base ml-2 sm:ml-10 gap-1 md:gap-2">
         Searching:
         <label className="p-1.5 w-20 sm:w-24 rounded-md text-white bg-rose-500 shadow-sm shadow-black hover:bg-rose-600 hover:cursor-pointer text-sm sm:text-base">
           <input

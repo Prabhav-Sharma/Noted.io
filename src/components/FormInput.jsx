@@ -57,7 +57,7 @@ function FormInput({
 
   return (
     <fieldset className="flex w-full flex-col items-center text-black">
-      <legend className="text-md pl-3 mb-1">{legend}</legend>
+      <legend className="text-lg pl-3 mb-1 font-neuton">{legend}</legend>
       {input}
     </fieldset>
   );
