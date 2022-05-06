@@ -133,9 +133,9 @@ const notePageReducer = (state, action) => {
 
 const sortNotes = ([...notes], sortByLatest) => {
   if (!sortByLatest)
-    return notes.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+    return notes.sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
   else
-    return notes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    return notes.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 };
 export {
   noteReducer,

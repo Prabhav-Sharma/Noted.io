@@ -21,8 +21,8 @@ function SaveButton({
 
   const updateNoteHandler = async () => {
     dispatch({ type: "SAVE_LOADING" });
+    note.updatedAt = new Date();
     const requestArgs = [note._id, { note: note }, token, userDataDispatch];
-
     let status =
       type === "ARCHIVE"
         ? await updateArchiveNote(...requestArgs)

@@ -80,7 +80,7 @@ function Note() {
       : () => navigate(`/note/HOME/${noteId}`);
 
   return (
-    <main className="flex flex-col gap-2 p-6 bg-white">
+    <main className="flex flex-col gap-2 relative p-6 bg-white">
       <NavLink
         to="/home"
         className="pb-2 font-medium font-caveat text-xl md:text-2xl"
@@ -153,6 +153,12 @@ function Note() {
           />
         </span>
       </div>
+      <p className="absolute top-2 right-2 font-caveat text-lg md:text-xl">
+        Last Updated:
+        <span className="text-cyan-700 mx-1 font-medium">
+          {new Date(note.updatedAt).toDateString()}
+        </span>
+      </p>
     </main>
   );
 }
