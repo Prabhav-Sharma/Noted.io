@@ -1,6 +1,5 @@
 import { Server, Model, RestSerializer } from "miragejs";
 import {
-  deleteFromArchivesHandler,
   getAllArchivedNotesHandler,
   restoreFromArchivesHandler,
   updateArchiveNoteHandler,
@@ -13,7 +12,6 @@ import {
 import {
   archiveNoteHandler,
   createNoteHandler,
-  deleteNoteHandler,
   getAllNotesHandler,
   updateNoteHandler,
   getNoteHandler,
@@ -61,7 +59,6 @@ export function makeServer({ environment = "development" } = {}) {
       this.get("/notes", getAllNotesHandler.bind(this));
       this.post("/notes", createNoteHandler.bind(this));
       this.post("/notes/:noteId", updateNoteHandler.bind(this));
-      this.delete("/notes/:noteId", deleteNoteHandler.bind(this));
       this.post("/notes/archives/:noteId", archiveNoteHandler.bind(this));
       this.get("/note/:type/:noteId", getNoteHandler.bind(this));
 
@@ -70,10 +67,6 @@ export function makeServer({ environment = "development" } = {}) {
       this.post(
         "/archives/restore/:noteId",
         restoreFromArchivesHandler.bind(this)
-      );
-      this.delete(
-        "/archives/delete/:noteId",
-        deleteFromArchivesHandler.bind(this)
       );
       this.post("/archives/:noteId", updateArchiveNoteHandler.bind(this));
 
