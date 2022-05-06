@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const signup = async (requestBody, dispatcher) => {
   try {
@@ -8,7 +9,6 @@ const signup = async (requestBody, dispatcher) => {
       data: requestBody,
     });
     localStorage.setItem("token", response.data.encodedToken);
-    console.log(response);
     dispatcher({
       type: "SIGNUP",
       payload: {
@@ -16,9 +16,11 @@ const signup = async (requestBody, dispatcher) => {
         token: response.data.encodedToken,
       },
     });
+    toast.success(`Welcome on board, ${response.data.createdUser.fullName}`);
     return "SUCCESS";
   } catch (e) {
     console.log(e);
+    toast.error("Was that a thud in the server room!?");
     return "FAILED";
   }
 };
@@ -39,9 +41,11 @@ const login = async (requestBody, dispatcher) => {
         token: response.data.encodedToken,
       },
     });
+    toast.success(`Welcome back ${response.data.foundUser.fullName}`);
     return "SUCCESS";
   } catch (e) {
     console.error(e);
+    toast.error("Was that a thud in the server room!?");
     return "FAILED";
   }
 };

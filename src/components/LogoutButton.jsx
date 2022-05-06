@@ -3,6 +3,7 @@ import { MdLogout } from "react-icons/md";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { useUserData } from "../contexts/providers/userDataProvider";
+import { toast } from "react-toastify";
 
 function LogoutButton({ styles = "" }) {
   const {
@@ -19,6 +20,7 @@ function LogoutButton({ styles = "" }) {
   const logout = () => {
     authDispatch({ type: "LOGOUT" });
     userDataDispatch({ type: "RESET" });
+    toast.success("Come back soon!");
     navigate("/");
   };
 
