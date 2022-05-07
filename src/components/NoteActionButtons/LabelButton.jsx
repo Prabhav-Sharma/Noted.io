@@ -2,24 +2,25 @@ import React, { useState } from "react";
 import { MdLabel } from "../../icons";
 import { FormInput } from "../index";
 import { getRandomColor, isBright } from "../helpers";
+import { toast } from "react-toastify";
 
 function LabelButton({ brightness, labels, labelToggle, dispatch }) {
   const [labelText, setLabelText] = useState("");
 
   const addLabelHandler = () => {
     if (labels.some((label) => label.text === labelText)) {
-      alert(`${labelText} is already a label`);
+      toast.warn(`${labelText} is already a label`);
       setLabelText("");
       return;
     }
 
     if (labels.length >= 5) {
-      alert("A note can only have 5 labels");
+      toast.warn("A note can only have 5 labels");
       return;
     }
 
     if (labelText.trim().length === 0) {
-      alert("Label can't be blank");
+      toast.warn("Label can't be blank");
       return;
     }
 

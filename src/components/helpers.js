@@ -130,6 +130,13 @@ const notePageReducer = (state, action) => {
       return { ...state, labelToggle: !state.labelToggle };
   }
 };
+
+const sortNotes = ([...notes], sortByLatest) => {
+  if (!sortByLatest)
+    return notes.sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
+  else
+    return notes.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+};
 export {
   noteReducer,
   isBright,
@@ -137,4 +144,5 @@ export {
   toCamelCase,
   searchQueryNotes,
   notePageReducer,
+  sortNotes,
 };

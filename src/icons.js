@@ -7,6 +7,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { GrClose } from "react-icons/gr";
 import { RiLoaderFill } from "react-icons/ri";
 import { ImSearch } from "react-icons/im";
+import { BiSort } from "react-icons/bi";
 
 export {
   FaHome,
@@ -25,4 +26,5 @@ export {
   MdUnarchive,
   ImSearch,
   GiPlagueDoctorProfile,
+  BiSort,
 };

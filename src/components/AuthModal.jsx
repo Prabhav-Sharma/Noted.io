@@ -6,6 +6,7 @@ import { login, signup } from "../services";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { FormInput } from "./index";
+import { toast } from "react-toastify";
 
 function AuthModal({ show }) {
   const { authModalToggle, setAuthModalToggle } = show;
@@ -32,11 +33,11 @@ function AuthModal({ show }) {
   const loginHandler = async (e) => {
     e.preventDefault();
     if (!EMAIL_REGEX.test(email)) {
-      alert("Invalid email address");
+      toast.warn("Invalid email address");
       return;
     }
     if (password.length === 0) {
-      alert("Fields can't be empty");
+      toast.warn("Fields can't be empty");
       return;
     }
 
@@ -60,17 +61,17 @@ function AuthModal({ show }) {
   const signupHandler = async (e) => {
     e.preventDefault();
     if (!EMAIL_REGEX.test(email)) {
-      alert("Invalid email address");
+      toast.warn("Invalid email address");
       return;
     }
 
     if (password.length === 0 || fullName === 0) {
-      alert("Fields can't be empty");
+      toast.warn("Fields can't be empty");
       return;
     }
 
     if (password !== confirmPassword) {
-      alert("Passwords don't match");
+      toast.warn("Passwords don't match");
       return;
     }
     setAuthButtonToggle(true);
@@ -83,7 +84,7 @@ function AuthModal({ show }) {
     display === "LOGIN" ? (
       <>
         <button
-          className="w-11/12 flex self-center justify-center bg-cyan-500 p-1.5 py-2 mt-1 md:text-lg text-white hover:bg-cyan-600"
+          className="w-11/12 flex self-center justify-center bg-cyan-500 p-1.5 py-2 mt-1 font-neuton text-lg md:text-xl text-white hover:bg-cyan-600"
           onClick={loginHandler}
         >
           {authButtonToggle ? (
@@ -93,7 +94,7 @@ function AuthModal({ show }) {
           )}
         </button>
         <button
-          className="w-11/12 flex self-center justify-center bg-white border border-solid mt-1 border-cyan-500 p-1.5  py-2  md:text-lg text-slate-800 hover:bg-slate-200"
+          className="w-11/12 flex self-center justify-center bg-white border border-solid mt-1 border-cyan-500 p-1.5 py-2 font-neuton text-lg md:text-xl text-slate-800 hover:bg-slate-200"
           onClick={loginWithTestCredentials}
         >
           {testCredentialsToggle ? (
@@ -105,7 +106,7 @@ function AuthModal({ show }) {
       </>
     ) : (
       <button
-        className="w-11/12 flex self-center justify-center bg-cyan-500 p-1.5  py-2 md:text-lg mt-1 text-white  hover:bg-cyan-600"
+        className="w-11/12 flex self-center justify-center bg-cyan-500 p-1.5  py-2 font-neuton text-lg md:text-xl mt-1 text-white  hover:bg-cyan-600"
         onClick={signupHandler}
       >
         {authButtonToggle ? (

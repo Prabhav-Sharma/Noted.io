@@ -1,5 +1,6 @@
-//Archive calls
 import axios from "axios";
+import { toast } from "react-toastify";
+//Archive calls
 const fetchArchives = async (token, dispatcher) => {
   try {
     const response = await axios({
@@ -13,7 +14,7 @@ const fetchArchives = async (token, dispatcher) => {
     });
   } catch (e) {
     console.log(e);
-    //Note for future self:Add toast here, remove this comment on adding toast
+    toast.error("I smell fire from the server room!");
   }
 };
 
@@ -26,17 +27,13 @@ const addToArchives = async (id, requestBody, token, dispatcher) => {
       data: requestBody,
     });
     dispatcher({
-      type: "UPDATE_ARCHIVES",
-      payload: { archives: response.data.archives },
+      type: "ADD_TO_ARCHIVES",
+      payload: { archives: response.data.archives, notes: response.data.notes },
     });
-
-    dispatcher({
-      type: "UPDATE_NOTES",
-      payload: { notes: response.data.notes },
-    });
+    toast.success(`${requestBody.note.title} Added to archives!`);
   } catch (e) {
     console.log(e);
-    //Note for future self:Add toast here, remove this comment on adding toast
+    toast.error("Our server is feeling down right now");
   }
 };
 
@@ -48,33 +45,13 @@ const restoreFromArchives = async (id, token, dispatcher) => {
       headers: { authorization: token },
     });
     dispatcher({
-      type: "UPDATE_ARCHIVES",
-      payload: { archives: response.data.archives },
+      type: "RECOVER_FROM_ARCHIVES",
+      payload: { archives: response.data.archives, notes: response.data.notes },
     });
-    dispatcher({
-      type: "UPDATE_NOTES",
-      payload: { notes: response.data.notes },
-    });
+    toast.success("Back to home, it goes!");
   } catch (e) {
     console.log(e);
-    //Note for future self:Add toast here, remove this comment on adding toast
-  }
-};
-
-const deleteFromArchives = async (id, token, dispatcher) => {
-  try {
-    const response = await axios({
-      method: "DELETE",
-      url: `/api/archives/delete/${id}`,
-      headers: { authorization: token },
-    });
-    dispatcher({
-      type: "UPDATE_ARCHIVES",
-      payload: { archives: response.data.archives },
-    });
-  } catch (e) {
-    console.log(e);
-    //Note for future self:Add toast here, remove this comment on adding toast
+    toast.error("This note seems to really like it here!");
   }
 };
 
@@ -90,17 +67,13 @@ const updateArchiveNote = async (id, requestBody, token, dispatcher) => {
       type: "UPDATE_ARCHIVES",
       payload: { archives: response.data.archives },
     });
+    toast.success("Changes saved!");
     return "SUCCESS";
   } catch (e) {
     console.log(e);
+    toast.error("It is the damn server again!?");
     return "FAILURE";
   }
 };
 
-export {
-  fetchArchives,
-  addToArchives,
-  deleteFromArchives,
-  restoreFromArchives,
-  updateArchiveNote,
-};
+export { fetchArchives, addToArchives, restoreFromArchives, updateArchiveNote };

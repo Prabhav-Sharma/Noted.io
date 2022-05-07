@@ -1,9 +1,8 @@
 import { login, signup } from "./authAPI";
-import { fetchNotes, addToNotes, updateNote, deleteNote } from "./notesAPI";
+import { fetchNotes, addToNotes, updateNote } from "./notesAPI";
 import {
   fetchArchives,
   addToArchives,
-  deleteFromArchives,
   restoreFromArchives,
   updateArchiveNote,
 } from "./archiveAPI";
@@ -21,10 +20,8 @@ export {
   fetchNotes,
   addToNotes,
   updateNote,
-  deleteNote,
   fetchArchives,
   addToArchives,
-  deleteFromArchives,
   restoreFromArchives,
   updateArchiveNote,
   fetchTrash,

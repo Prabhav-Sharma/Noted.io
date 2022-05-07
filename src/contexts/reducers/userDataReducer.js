@@ -5,6 +5,14 @@ const userDataReducer = (state, action) => {
     case "UPDATE_ARCHIVES":
       return { ...state, archives: action.payload.archives };
 
+    case "ADD_TO_ARCHIVES":
+    case "RECOVER_FROM_ARCHIVES":
+      return {
+        ...state,
+        archives: action.payload.archives,
+        notes: action.payload.notes,
+      };
+
     case "ADD_TO_TRASH":
       return {
         ...state,

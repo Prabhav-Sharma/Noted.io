@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { toast } from "react-toastify";
 const fetchTrash = async (token, dispatcher) => {
   try {
     const response = await axios({
@@ -13,6 +13,7 @@ const fetchTrash = async (token, dispatcher) => {
     });
   } catch (e) {
     console.log(e);
+    toast.error("Who stole my trash!?");
   }
 };
 
@@ -26,8 +27,10 @@ const addToTrash = async (id, requestBody, token, dispatcher) => {
     });
     const { notes, archives, trash } = response.data;
     dispatcher({ type: "ADD_TO_TRASH", payload: { notes, archives, trash } });
+    toast.success("Trash note? Trash note!");
   } catch (e) {
     console.log(e);
+    toast.error("This one isn't really good at goodbyes!");
   }
 };
 
@@ -42,8 +45,10 @@ const removeFromTrash = async (id, token, dispatcher) => {
       type: "UPDATE_TRASH",
       payload: { trash: response.data.trash },
     });
+    toast.success("Huh, what note?");
   } catch (e) {
     console.log(e);
+    toast.error("This one isn't really good at goodbyes!");
   }
 };
 
@@ -59,8 +64,10 @@ const restoreFromTrash = async (id, requestBody, token, dispatcher) => {
       type: "RECOVER_FROM_TRASH",
       payload: { trash: response.data.trash, notes: response.data.notes },
     });
+    toast.success("This one can stay, I guess!");
   } catch (e) {
     console.log(e);
+    toast.error("Like me, this note belong here, retry!");
   }
 };
 
