@@ -99,6 +99,7 @@ function Note() {
           value={note.text}
           onChange={(e) => dispatch({ type: "TEXT", payload: { text: e } })}
           readOnly={type === "TRASH"}
+          preserveWhitespace={true}
           placeholder="Start writing..."
         />
         <FormInput
