@@ -1,5 +1,6 @@
 import React from "react";
-import { IoMdColorPalette } from "../../icons";
+import { IoMdColorPalette } from "../../utils/icons";
+import { NOTE_COLOR_ACTION } from "../../utils/constants";
 
 function ColorButton({ noteColor, brightness, dispatch }) {
   return (
@@ -9,7 +10,7 @@ function ColorButton({ noteColor, brightness, dispatch }) {
         value={noteColor}
         onChange={(e) =>
           dispatch({
-            type: "NOTE_COLOR",
+            type: NOTE_COLOR_ACTION,
             payload: { noteColor: e.target.value },
           })
         }

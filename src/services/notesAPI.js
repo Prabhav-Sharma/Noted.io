@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { UPDATE_NOTES_ACTION, NOTE_ACTION } from "../utils/constants";
 //fetch notes
 const fetchNotes = async (token, dispatcher) => {
   try {
@@ -9,14 +10,14 @@ const fetchNotes = async (token, dispatcher) => {
       headers: { authorization: token },
     });
     dispatcher({
-      type: "UPDATE_NOTES",
+      type: UPDATE_NOTES_ACTION,
       payload: { notes: response.data.notes },
     });
-    return "SUCCESS";
+    return response.data.notes;
   } catch (e) {
     console.log(e);
     toast.error("Hold up, can't find the notes!");
-    return "FAILURE";
+    return false;
   }
 };
 
@@ -27,7 +28,7 @@ const fetchNote = async (noteId, type, token, dispatcher) => {
       url: `/api/note/${type}/${noteId}`,
       headers: { authorization: token },
     });
-    dispatcher({ type: "NOTE", payload: { note: response.data.note } });
+    dispatcher({ type: NOTE_ACTION, payload: { note: response.data.note } });
   } catch (e) {
     console.log(e);
     toast.error("This is weird, I can't access it!");
@@ -45,12 +46,12 @@ const addToNotes = async (requestBody, token, dispatcher) => {
     });
 
     dispatcher({
-      type: "UPDATE_NOTES",
+      type: UPDATE_NOTES_ACTION,
       payload: { notes: response.data.notes },
     });
     toast.success("New note created!");
   } catch (e) {
-    toast.error("Jonathan, stop playing the server!");
+    toast.error("Jonathan, stop playing with the server!");
     console.log(e);
   }
 };
@@ -65,7 +66,7 @@ const updateNote = async (id, requestBody, token, dispatcher) => {
       data: requestBody,
     });
     dispatcher({
-      type: "UPDATE_NOTES",
+      type: UPDATE_NOTES_ACTION,
       payload: { notes: response.data.notes },
     });
     toast.success("Changes Saved!");

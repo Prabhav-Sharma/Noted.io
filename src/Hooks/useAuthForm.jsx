@@ -1,16 +1,22 @@
 import { useReducer } from "react";
-
+import {
+  FULL_NAME_ACTION,
+  EMAIL_ACTION,
+  PASSWORD_ACTION,
+  CONFIRM_PASSWORD_ACTION,
+  DISPLAY_ACTION,
+} from "../utils/constants";
 const authFormReducer = (state, action) => {
   switch (action.type) {
-    case "FULL_NAME":
+    case FULL_NAME_ACTION:
       return { ...state, fullName: action.payload.fullName };
-    case "EMAIL":
+    case EMAIL_ACTION:
       return { ...state, email: action.payload.email };
-    case "PASSWORD":
+    case PASSWORD_ACTION:
       return { ...state, password: action.payload.password };
-    case "CONFIRM_PASSWORD":
+    case CONFIRM_PASSWORD_ACTION:
       return { ...state, confirmPassword: action.payload.confirmPassword };
-    case "DISPLAY":
+    case DISPLAY_ACTION:
       if (state.display === action.payload.display) return state;
       return {
         ...state,

@@ -1,35 +1,48 @@
+import {
+  TITLE_ACTION,
+  TEXT_ACTION,
+  NOTE_ACTION,
+  SAVE_TOGGLE_ACTION,
+  SAVE_LOADING_ACTION,
+  ADD_LABEL_ACTION,
+  REMOVE_LABEL_ACTION,
+  NOTE_COLOR_ACTION,
+  PINNED_ACTION,
+  LABEL_TOGGLE_ACTION,
+} from "../utils/constants";
+
 const noteReducer = (state, action) => {
   let updatedLabels;
   switch (action.type) {
-    case "ADD_LABEL":
+    case ADD_LABEL_ACTION:
       updatedLabels = [...state.note.labels, action.payload.label];
       return {
         ...state,
         note: { ...state.note, labels: updatedLabels },
       };
 
-    case "REMOVE_LABEL":
+    case REMOVE_LABEL_ACTION:
       updatedLabels = state.note.labels.filter(
         (label) => label.text !== action.payload.label.text
       );
       return { ...state, note: { ...state.note, labels: updatedLabels } };
 
-    case "NOTE_COLOR":
+    case NOTE_COLOR_ACTION:
       return {
         ...state,
         note: { ...state.note, color: action.payload.noteColor },
       };
 
-    case "LABEL_TOGGLE":
+    case LABEL_TOGGLE_ACTION:
       return { ...state, labelToggle: !state.labelToggle };
 
-    case "SAVE_TOGGLE":
+    case SAVE_TOGGLE_ACTION:
       return { ...state, saveToggle: action.payload.saveToggle };
 
-    case "SAVE_LOADING":
+    case SAVE_LOADING_ACTION:
       return { ...state, saveLoading: !state.saveLoading };
 
-    case "PINNED":
+    case PINNED_ACTION:
       return { ...state, note: { ...state.note, pinned: !state.note.pinned } };
 
     default:
@@ -108,26 +121,26 @@ const toCamelCase = (str) =>
 
 const notePageReducer = (state, action) => {
   switch (action.type) {
-    case "TITLE":
+    case TITLE_ACTION:
       return { ...state, note: { ...state.note, title: action.payload.title } };
 
-    case "TEXT":
+    case TEXT_ACTION:
       return { ...state, note: { ...state.note, text: action.payload.text } };
 
-    case "NOTE":
+    case NOTE_ACTION:
       return {
         ...state,
         note: action.payload.note,
         initialNote: action.payload.note,
       };
-    case "SAVE_TOGGLE":
+    case SAVE_TOGGLE_ACTION:
       return { ...state, saveToggle: action.payload.saveToggle };
 
-    case "SAVE_LOADING":
+    case SAVE_LOADING_ACTION:
       return { ...state, saveLoading: !state.saveLoading };
 
-    case "LABEL_TOGGLE":
-      return { ...state, labelToggle: !state.labelToggle };
+    default:
+      return state;
   }
 };
 

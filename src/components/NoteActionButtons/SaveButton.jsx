@@ -1,8 +1,13 @@
 import React from "react";
 import { useAuth } from "../../contexts/providers/AuthProvider";
 import { useUserData } from "../../contexts/providers/userDataProvider";
-import { FaSave } from "../../icons";
+import { FaSave } from "../../utils/icons";
 import { updateArchiveNote, updateNote } from "../../services";
+import {
+  SAVE_LOADING_ACTION,
+  LABEL_TOGGLE_ACTION,
+  SAVE_TOGGLE_ACTION,
+} from "../../utils/constants";
 
 function SaveButton({
   type,
@@ -28,10 +33,10 @@ function SaveButton({
         ? await updateArchiveNote(...requestArgs)
         : await updateNote(...requestArgs);
 
-    labelToggle && dispatch({ type: "LABEL_TOGGLE" });
-    dispatch({ type: "SAVE_LOADING" });
+    labelToggle && dispatch({ type: LABEL_TOGGLE_ACTION });
+    dispatch({ type: SAVE_LOADING_ACTION });
     status === "SUCCESS" &&
-      dispatch({ type: "SAVE_TOGGLE", payload: { saveToggle: false } });
+      dispatch({ type: SAVE_TOGGLE_ACTION, payload: { saveToggle: false } });
   };
 
   return (

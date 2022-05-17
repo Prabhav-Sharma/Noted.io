@@ -1,5 +1,10 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import {
+  UPDATE_TRASH_ACTION,
+  ADD_TO_TRASH_ACTION,
+  RECOVER_FROM_TRASH_ACTION,
+} from "../utils/constants";
 const fetchTrash = async (token, dispatcher) => {
   try {
     const response = await axios({
@@ -8,7 +13,7 @@ const fetchTrash = async (token, dispatcher) => {
       headers: { authorization: token },
     });
     dispatcher({
-      type: "UPDATE_TRASH",
+      type: UPDATE_TRASH_ACTION,
       payload: { trash: response.data.trash },
     });
   } catch (e) {
@@ -26,7 +31,10 @@ const addToTrash = async (id, requestBody, token, dispatcher) => {
       data: requestBody,
     });
     const { notes, archives, trash } = response.data;
-    dispatcher({ type: "ADD_TO_TRASH", payload: { notes, archives, trash } });
+    dispatcher({
+      type: ADD_TO_TRASH_ACTION,
+      payload: { notes, archives, trash },
+    });
     toast.success("Trash note? Trash note!");
   } catch (e) {
     console.log(e);
@@ -42,7 +50,7 @@ const removeFromTrash = async (id, token, dispatcher) => {
       headers: { authorization: token },
     });
     dispatcher({
-      type: "UPDATE_TRASH",
+      type: UPDATE_TRASH_ACTION,
       payload: { trash: response.data.trash },
     });
     toast.success("Huh, what note?");
@@ -61,7 +69,7 @@ const restoreFromTrash = async (id, requestBody, token, dispatcher) => {
       data: requestBody,
     });
     dispatcher({
-      type: "RECOVER_FROM_TRASH",
+      type: RECOVER_FROM_TRASH_ACTION,
       payload: { trash: response.data.trash, notes: response.data.notes },
     });
     toast.success("This one can stay, I guess!");

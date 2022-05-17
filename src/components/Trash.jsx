@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { NoteCard } from ".";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useUserData } from "../contexts/providers/userDataProvider";
-import { IoMdTrash } from "../icons";
+import { IoMdTrash } from "../utils/icons";
 import { fetchTrash } from "../services";
 
 function Trash() {
