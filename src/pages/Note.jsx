@@ -10,6 +10,11 @@ import {
 import { notePageReducer, isBright } from "../components/helpers";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { fetchNote } from "../services/notesAPI";
+import {
+  TITLE_ACTION,
+  TEXT_ACTION,
+  SAVE_TOGGLE_ACTION,
+} from "../utils/constants";
 import "../styles/quill.css";
 
 function Note() {
@@ -39,7 +44,7 @@ function Note() {
 
   useEffect(() => {
     dispatch({
-      type: "SAVE_TOGGLE",
+      type: SAVE_TOGGLE_ACTION,
       payload: {
         saveToggle: JSON.stringify(note) !== JSON.stringify(initialNote),
       },
@@ -97,7 +102,9 @@ function Note() {
           theme="snow"
           modules={modules}
           value={note.text}
-          onChange={(e) => dispatch({ type: "TEXT", payload: { text: e } })}
+          onChange={(e) =>
+            dispatch({ type: TEXT_ACTION, payload: { text: e } })
+          }
           readOnly={type === "TRASH"}
           preserveWhitespace={true}
           placeholder="Start writing..."
@@ -106,10 +113,10 @@ function Note() {
           value={note.title}
           onChange={(e) =>
             type !== "TRASH" &&
-            dispatch({ type: "TITLE", payload: { title: e.target.value } })
+            dispatch({ type: TITLE_ACTION, payload: { title: e.target.value } })
           }
           styles={
-            " bg-transparent absolute top-3 left-0 text-base rounded-none w-56 ml-4 font-merriWeather  text-black border-0 focus:border-0 focus:outline-none focus:border-b-2 border-b-2 border-slate-600 border-solid"
+            " bg-transparent absolute top-3 left-0 text-base md:text-xl rounded-none w-56 ml-4 text-black border-0 focus:border-0 focus:outline-none focus:border-b-2 border-b-2 border-slate-600 border-solid"
           }
           maxLength="25"
           placeholder="Title:"
