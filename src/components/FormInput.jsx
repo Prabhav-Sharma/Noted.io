@@ -1,5 +1,5 @@
 import React from "react";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "../icons";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "../utils/icons";
 import { useToggle } from "../Hooks";
 
 function FormInput({
@@ -57,7 +57,7 @@ function FormInput({
 
   return (
     <fieldset className="flex w-full flex-col items-center text-black">
-      <legend className="text-lg pl-3 mb-1 font-neuton">{legend}</legend>
+      <legend className=" pl-3 mb-1">{legend}</legend>
       {input}
     </fieldset>
   );

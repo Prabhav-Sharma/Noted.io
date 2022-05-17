@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useAuth } from "../contexts/providers/AuthProvider";
-import { GiPlagueDoctorProfile } from "../icons";
+import { GiPlagueDoctorProfile } from "../utils/icons";
 import { fetchUserDetails } from "../services/authAPI";
 
 function Profile() {

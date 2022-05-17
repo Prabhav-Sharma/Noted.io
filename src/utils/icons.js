@@ -1,5 +1,5 @@
 import { FaHome, FaTrash, FaSave } from "react-icons/fa";
-import { MdLabel, MdArchive, MdUnarchive } from "react-icons/md";
+import { MdLabel, MdArchive, MdUnarchive, MdLogout } from "react-icons/md";
 import { IoMdColorPalette, IoMdTrash } from "react-icons/io";
 import { BsPinFill } from "react-icons/bs";
 import { GiNotebook, GiPlagueDoctorProfile } from "react-icons/gi";
@@ -27,4 +27,5 @@ export {
   ImSearch,
   GiPlagueDoctorProfile,
   BiSort,
+  MdLogout,
 };

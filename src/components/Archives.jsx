@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useUserData } from "../contexts/providers/userDataProvider";
 import { fetchArchives } from "../services";
-import { MdArchive } from "../icons";
+import { MdArchive } from "../utils/icons";
 import NoteCard from "./NoteCard";
 
 function Archives() {

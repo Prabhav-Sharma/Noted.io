@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useUserData } from "../contexts/providers/userDataProvider";
 import { fetchArchives, fetchNotes, fetchTrash } from "../services";
-import { ImSearch } from "../icons";
+import { ImSearch } from "../utils/icons";
 import { toCamelCase, searchQueryNotes } from "./helpers";
 import { FormInput } from ".";
 import NoteCard from "./NoteCard";
@@ -72,7 +72,7 @@ function Search() {
       <h1 className="self-start flex items-center gap-1 text-2xl pl-2 font-bold font-caveat sm:pl-6 sm:text-3xl md:pl-10">
         Search <ImSearch className="rotate-90" />
       </h1>
-      <span className="flex items-center flex-wrap self-start font-merriWeather text-base ml-2 sm:ml-10 gap-1 md:gap-2">
+      <span className="flex items-center flex-wrap self-start text-base md:text-xl ml-2 sm:ml-10 gap-1 md:gap-2">
         Searching:
         <label className="p-1.5 w-20 sm:w-24 rounded-md text-white bg-rose-500 shadow-sm shadow-black hover:bg-rose-600 hover:cursor-pointer text-sm sm:text-base">
           <input
@@ -108,7 +108,7 @@ function Search() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder={`🔍 Search for ${toCamelCase(searchType)}...`}
-        styles="self-center max-w-full bg-slate-900 text-white p-2 relative md:text-lg font-notoSans"
+        styles="self-center max-w-full bg-slate-900 text-white p-2 relative md:text-lg"
         maxLength="12"
       />
       {search.length !== 0 &&
