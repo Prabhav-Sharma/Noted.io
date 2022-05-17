@@ -5,7 +5,7 @@ import {
   GiPlagueDoctorProfile,
   MdArchive,
   ImSearch,
-} from "../icons";
+} from "../utils/icons";
 import { Archives, Notes, Trash, Search, Profile } from "../components";
 import { addToNotes } from "../services";
 import { useAuth } from "../contexts/providers/AuthProvider";
@@ -101,7 +101,7 @@ function Home() {
         </button>
         <button
           onClick={addNewNoteHandler}
-          className="p-3 w-48 text-sm sm:w-44 lg:text-xl lg:w-48 sm:text-lg ease-in-out font-notoSans font-light hover:bg-cyan-600 bg-cyan-500 rounded-lg text-white"
+          className="p-3 w-48 text-sm sm:w-44 lg:text-xl lg:w-48 sm:text-lg ease-in-out font-normal hover:bg-cyan-600 bg-cyan-500 rounded-lg text-white"
         >
           Create new note
         </button>

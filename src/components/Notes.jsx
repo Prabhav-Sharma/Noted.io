@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useUserData } from "../contexts/providers/userDataProvider";
-import { BsPinFill, GiNotebook, BiSort } from "../icons";
+import { BsPinFill, GiNotebook, BiSort } from "../utils/icons";
 import { addToNotes, fetchNotes } from "../services";
 import { getRandomColor, sortNotes } from "./helpers";
 import { NoteCard } from "./index";
@@ -20,26 +20,25 @@ function Notes() {
   const { toggle: sortByLatest, setToggle: setSortByLatest } = useToggle(true);
 
   useEffect(() => {
-    fetchNotes(token, userDataDispatch);
-  }, []);
-
-  useEffect(() => {
-    if (notes.length === 0) {
-      addToNotes(
-        {
-          note: {
-            title: "",
-            text: "<p><br></p>",
-            color: getRandomColor(),
-            pinned: false,
-            labels: [],
-            updatedAt: new Date(),
+    (async () => {
+      const notes = await fetchNotes(token, userDataDispatch);
+      if (notes && notes.length === 0) {
+        addToNotes(
+          {
+            note: {
+              title: "",
+              text: "<p><br></p>",
+              color: getRandomColor(),
+              pinned: false,
+              labels: [],
+              updatedAt: new Date(),
+            },
           },
-        },
-        token,
-        userDataDispatch
-      );
-    }
+          token,
+          userDataDispatch
+        );
+      }
+    })();
   }, []);
 
   const PinnedSection = () => {
@@ -95,6 +94,11 @@ function Notes() {
       </span>
       <PinnedSection />
       <AllSection />
+      {notes.length === 0 && (
+        <h3 className="text-base mt-10 font-bold sm:text-xl md:text-2xl font-caveat">
+          Create a note to get started ^_^
+        </h3>
+      )}
     </section>
   );
 }

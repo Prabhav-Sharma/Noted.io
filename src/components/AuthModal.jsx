@@ -1,11 +1,18 @@
-import React from "react";
 import ReactDOM from "react-dom";
-import { GrClose, RiLoaderFill } from "../icons";
+import { GrClose, RiLoaderFill } from "../utils/icons";
+import { EMAIL_REGEX } from "../utils/constants";
 import { useAuthForm, useToggle } from "../Hooks";
 import { login, signup } from "../services";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { FormInput } from "./index";
+import {
+  FULL_NAME_ACTION,
+  EMAIL_ACTION,
+  PASSWORD_ACTION,
+  CONFIRM_PASSWORD_ACTION,
+  DISPLAY_ACTION,
+} from "../utils/constants";
 import { toast } from "react-toastify";
 
 function AuthModal({ show }) {
@@ -27,8 +34,6 @@ function AuthModal({ show }) {
   if (!authModalToggle) {
     return null;
   }
-
-  const EMAIL_REGEX = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-zA-Z0-9]+$/;
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -84,7 +89,7 @@ function AuthModal({ show }) {
     display === "LOGIN" ? (
       <>
         <button
-          className="w-11/12 flex self-center justify-center bg-cyan-500 p-1.5 py-2 mt-1 font-neuton text-lg md:text-xl text-white hover:bg-cyan-600"
+          className="w-11/12 flex self-center justify-center bg-cyan-500 p-1.5 py-2 mt-1 font-normal rounded-md text-white hover:bg-cyan-600"
           onClick={loginHandler}
         >
           {authButtonToggle ? (
@@ -94,7 +99,7 @@ function AuthModal({ show }) {
           )}
         </button>
         <button
-          className="w-11/12 flex self-center justify-center bg-white border border-solid mt-1 border-cyan-500 p-1.5 py-2 font-neuton text-lg md:text-xl text-slate-800 hover:bg-slate-200"
+          className="w-11/12 flex self-center justify-center bg-white border border-solid mt-1 border-cyan-500 p-1.5 py-2 font-normal rounded-md text-slate-800 hover:bg-slate-200"
           onClick={loginWithTestCredentials}
         >
           {testCredentialsToggle ? (
@@ -106,13 +111,13 @@ function AuthModal({ show }) {
       </>
     ) : (
       <button
-        className="w-11/12 flex self-center justify-center bg-cyan-500 p-1.5  py-2 font-neuton text-lg md:text-xl mt-1 text-white  hover:bg-cyan-600"
+        className="w-11/12 flex self-center justify-center bg-cyan-500 p-1.5  py-2 font-normal rounded-md mt-1 text-white  hover:bg-cyan-600"
         onClick={signupHandler}
       >
         {authButtonToggle ? (
           <RiLoaderFill className="text-2xl animate-spin" />
         ) : (
-          "Signup"
+          "Sign up"
         )}
       </button>
     );
@@ -139,7 +144,7 @@ function AuthModal({ show }) {
               }  p-2 text-md w-full hover:bg-rose-200`}
               onClick={() =>
                 authFormDispatch({
-                  type: "DISPLAY",
+                  type: DISPLAY_ACTION,
                   payload: { display: "LOGIN" },
                 })
               }
@@ -153,7 +158,7 @@ function AuthModal({ show }) {
               }  p-2 text-md w-full hover:bg-rose-200`}
               onClick={() =>
                 authFormDispatch({
-                  type: "DISPLAY",
+                  type: DISPLAY_ACTION,
                   payload: { display: "SIGNUP" },
                 })
               }
@@ -170,7 +175,7 @@ function AuthModal({ show }) {
                 value={fullName}
                 onChange={(e) =>
                   authFormDispatch({
-                    type: "FULL_NAME",
+                    type: FULL_NAME_ACTION,
                     payload: { fullName: e.target.value },
                   })
                 }
@@ -183,7 +188,7 @@ function AuthModal({ show }) {
               value={email}
               onChange={(e) =>
                 authFormDispatch({
-                  type: "EMAIL",
+                  type: EMAIL_ACTION,
                   payload: { email: e.target.value },
                 })
               }
@@ -195,7 +200,7 @@ function AuthModal({ show }) {
               value={password}
               onChange={(e) =>
                 authFormDispatch({
-                  type: "PASSWORD",
+                  type: PASSWORD_ACTION,
                   payload: { password: e.target.value },
                 })
               }
@@ -209,7 +214,7 @@ function AuthModal({ show }) {
                 value={confirmPassword}
                 onChange={(e) =>
                   authFormDispatch({
-                    type: "CONFIRM_PASSWORD",
+                    type: CONFIRM_PASSWORD_ACTION,
                     payload: { confirmPassword: e.target.value },
                   })
                 }
