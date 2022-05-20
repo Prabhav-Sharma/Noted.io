@@ -1,6 +1,6 @@
 import React from "react";
 import { AuthModal } from "../components";
-import { useToggle } from "../Hooks";
+import { useToggle, useDocumentTitle } from "../Hooks";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +13,8 @@ function Landing() {
   } = useAuth();
 
   const navigate = useNavigate();
+
+  useDocumentTitle("Welcome");
 
   const CTAButton = isAuthenticated ? (
     <button
