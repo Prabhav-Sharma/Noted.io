@@ -2,12 +2,15 @@ import React, { useEffect } from "react";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { GiPlagueDoctorProfile } from "../utils/icons";
 import { fetchUserDetails } from "../services/authAPI";
+import { useDocumentTitle } from "../Hooks";
 
 function Profile() {
   const {
     authState: { user, token },
     authDispatch,
   } = useAuth();
+
+  useDocumentTitle("Profile");
 
   useEffect(() => {
     fetchUserDetails(token, authDispatch);

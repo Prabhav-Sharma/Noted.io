@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { NoteCard } from ".";
+import { NoteCard } from "../components";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useUserData } from "../contexts/providers/userDataProvider";
 import { IoMdTrash } from "../utils/icons";
 import { fetchTrash } from "../services";
+import { useDocumentTitle } from "../Hooks";
 
 function Trash() {
   const {
@@ -14,6 +15,8 @@ function Trash() {
     userDataState: { trash },
     userDataDispatch,
   } = useUserData();
+
+  useDocumentTitle("Trash");
 
   useEffect(() => {
     fetchTrash(token, userDataDispatch);

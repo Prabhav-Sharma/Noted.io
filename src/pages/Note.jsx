@@ -7,7 +7,7 @@ import {
   SaveButton,
   ArchiveButton,
 } from "../components";
-import { notePageReducer, isBright } from "../components/helpers";
+import { notePageReducer, isBright } from "../utils/helpers";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { fetchNote } from "../services/notesAPI";
 import {
@@ -16,6 +16,7 @@ import {
   SAVE_TOGGLE_ACTION,
 } from "../utils/constants";
 import "../styles/quill.css";
+import { useDocumentTitle } from "../Hooks";
 
 function Note() {
   const [state, dispatch] = useReducer(notePageReducer, {
@@ -37,6 +38,8 @@ function Note() {
   const {
     authState: { token },
   } = useAuth();
+
+  useDocumentTitle(note.title ? note.title : "Note", [note.title]);
 
   useEffect(() => {
     fetchNote(noteId, type, token, dispatch);

@@ -3,9 +3,9 @@ import { useAuth } from "../contexts/providers/AuthProvider";
 import { useUserData } from "../contexts/providers/userDataProvider";
 import { fetchArchives, fetchNotes, fetchTrash } from "../services";
 import { ImSearch } from "../utils/icons";
-import { toCamelCase, searchQueryNotes } from "./helpers";
-import { FormInput } from ".";
-import NoteCard from "./NoteCard";
+import { toCamelCase, searchQueryNotes } from "../utils/helpers";
+import { NoteCard, FormInput } from "../components";
+import { useDocumentTitle } from "../Hooks";
 
 function Search() {
   const [search, setSearch] = useState("");
@@ -18,6 +18,8 @@ function Search() {
     userDataState: { notes, archives, trash },
     userDataDispatch,
   } = useUserData();
+
+  useDocumentTitle("Search");
 
   useEffect(() => {
     fetchNotes(token, userDataDispatch);
