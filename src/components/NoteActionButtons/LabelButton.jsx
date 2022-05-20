@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MdLabel } from "../../utils/icons";
 import { FormInput } from "../index";
-import { getRandomColor, isBright } from "../helpers";
+import { getRandomColor, isBright } from "../../utils/helpers";
 import { toast } from "react-toastify";
 import {
   ADD_LABEL_ACTION,

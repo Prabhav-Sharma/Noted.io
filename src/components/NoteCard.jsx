@@ -7,7 +7,7 @@ import {
   ArchiveButton,
   SaveButton,
 } from "../components";
-import { noteReducer, isBright } from "./helpers";
+import { noteReducer, isBright } from "../utils/helpers";
 import { useNavigate } from "react-router-dom";
 import { SAVE_TOGGLE_ACTION, PINNED_ACTION } from "../utils/constants";
 import DOMPurify from "dompurify";
