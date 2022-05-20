@@ -21,7 +21,7 @@ const signup = async (requestBody, dispatcher) => {
     return "SUCCESS";
   } catch (e) {
     console.log(e);
-    toast.error("Was that a thud in the server room!?");
+    toast.error("Something's not right in the server room!");
     return "FAILED";
   }
 };
@@ -46,7 +46,7 @@ const login = async (requestBody, dispatcher) => {
     return "SUCCESS";
   } catch (e) {
     console.error(e);
-    toast.error("Was that a thud in the server room!?");
+    toast.error("Wrong credentials!");
     return "FAILED";
   }
 };
