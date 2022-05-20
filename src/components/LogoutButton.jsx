@@ -1,5 +1,4 @@
-import React from "react";
-import { MdLogout } from "react-icons/md";
+import { MdLogout } from "../utils/icons";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { useUserData } from "../contexts/providers/userDataProvider";
@@ -31,7 +30,7 @@ function LogoutButton({ styles = "" }) {
   return (
     <button
       onClick={logout}
-      className={`absolute flex gap-2 items-center text-white top-7 right-4 sm:text-xl ${styles}`}
+      className={`absolute flex gap-2 items-center text-white top-6 right-4 sm:text-xl ${styles}`}
     >
       {fullName} <MdLogout className="align-sub text-2xl" />
     </button>

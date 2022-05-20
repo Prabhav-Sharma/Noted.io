@@ -1,7 +1,14 @@
+import {
+  LOGOUT_ACTION,
+  LOGIN_ACTION,
+  USER_ACTION,
+  SIGN_UP_ACTION,
+} from "../../utils/constants";
+
 const authReducer = (state, action) => {
   switch (action.type) {
-    case "LOGIN":
-    case "SIGNUP":
+    case LOGIN_ACTION:
+    case SIGN_UP_ACTION:
       return {
         ...state,
         token: action.payload.token,
@@ -9,10 +16,10 @@ const authReducer = (state, action) => {
         isAuthenticated: true,
       };
 
-    case "USER":
+    case USER_ACTION:
       return { ...state, user: action.payload.user };
 
-    case "LOGOUT":
+    case LOGOUT_ACTION:
       localStorage.removeItem("token");
       return { ...state, token: null, user: {}, isAuthenticated: false };
     default:

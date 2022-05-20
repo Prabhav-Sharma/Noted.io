@@ -3,9 +3,6 @@ module.exports = {
   theme: {
     fontFamily: {
       caveat: "Caveat, cursive",
-      neuton: "Neuton, serif",
-      notoSans: "Noto Sans, sans-serif",
-      merriWeather: "Merriweather, serif",
     },
     extend: {},
   },

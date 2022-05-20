@@ -1,6 +1,6 @@
 import React from "react";
 import { AuthModal } from "../components";
-import { useToggle } from "../Hooks";
+import { useToggle, useDocumentTitle } from "../Hooks";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
@@ -9,21 +9,23 @@ function Landing() {
     useToggle();
 
   const {
-    authState: { isAuthenticated, user },
+    authState: { isAuthenticated },
   } = useAuth();
 
   const navigate = useNavigate();
 
+  useDocumentTitle("Welcome");
+
   const CTAButton = isAuthenticated ? (
     <button
-      className="p-3 w-32 sm:w-36 md:w-44 2xl:w-48 text-base sm:text-lg md:text-xl font-normal ease-in-out duration-300 font-notoSans hover:bg-cyan-600 bg-cyan-500 rounded-lg text-white"
+      className="p-3 w-32 sm:w-36 md:w-44 2xl:w-48 text-base sm:text-lg md:text-xl font-normal ease-in-out duration-300 hover:bg-cyan-600 bg-cyan-500 rounded-lg text-white"
       onClick={() => navigate("/home")}
     >
       Start Writing..
     </button>
   ) : (
     <button
-      className="p-3 w-32 sm:w-36 md:w-44 2xl:w-48 text-base sm:text-lg md:text-xl font-normal ease-in-out duration-300 font-notoSans hover:bg-cyan-600 bg-cyan-500 rounded-lg text-white"
+      className="p-3 w-32 sm:w-36 md:w-44 2xl:w-48 text-base sm:text-lg md:text-xl font-normal ease-in-out duration-300 hover:bg-cyan-600 bg-cyan-500 rounded-lg text-white"
       onClick={() => setAuthModalToggle(true)}
     >
       Get Started

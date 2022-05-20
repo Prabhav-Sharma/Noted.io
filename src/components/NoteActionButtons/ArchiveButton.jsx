@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth } from "../../contexts/providers/AuthProvider";
 import { useUserData } from "../../contexts/providers/userDataProvider";
 import { addToArchives, restoreFromArchives } from "../../services";
-import { MdArchive, MdUnarchive } from "../../icons";
+import { MdArchive, MdUnarchive } from "../../utils/icons";
 
 function ArchiveButton({ type, brightness, note, addFunctions = undefined }) {
   const {

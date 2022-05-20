@@ -1,5 +1,10 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import {
+  UPDATE_ARCHIVES_ACTION,
+  ADD_TO_ARCHIVES_ACTION,
+  RECOVER_FROM_ARCHIVES_ACTION,
+} from "../utils/constants";
 //Archive calls
 const fetchArchives = async (token, dispatcher) => {
   try {
@@ -9,7 +14,7 @@ const fetchArchives = async (token, dispatcher) => {
       headers: { authorization: token },
     });
     dispatcher({
-      type: "UPDATE_ARCHIVES",
+      type: UPDATE_ARCHIVES_ACTION,
       payload: { archives: response.data.archives },
     });
   } catch (e) {
@@ -27,7 +32,7 @@ const addToArchives = async (id, requestBody, token, dispatcher) => {
       data: requestBody,
     });
     dispatcher({
-      type: "ADD_TO_ARCHIVES",
+      type: ADD_TO_ARCHIVES_ACTION,
       payload: { archives: response.data.archives, notes: response.data.notes },
     });
     toast.success(`${requestBody.note.title} Added to archives!`);
@@ -45,7 +50,7 @@ const restoreFromArchives = async (id, token, dispatcher) => {
       headers: { authorization: token },
     });
     dispatcher({
-      type: "RECOVER_FROM_ARCHIVES",
+      type: RECOVER_FROM_ARCHIVES_ACTION,
       payload: { archives: response.data.archives, notes: response.data.notes },
     });
     toast.success("Back to home, it goes!");
@@ -64,7 +69,7 @@ const updateArchiveNote = async (id, requestBody, token, dispatcher) => {
       data: requestBody,
     });
     dispatcher({
-      type: "UPDATE_ARCHIVES",
+      type: UPDATE_ARCHIVES_ACTION,
       payload: { archives: response.data.archives },
     });
     toast.success("Changes saved!");

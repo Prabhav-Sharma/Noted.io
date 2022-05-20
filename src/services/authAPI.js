@@ -1,4 +1,5 @@
 import axios from "axios";
+import { USER_ACTION, LOGIN_ACTION, SIGN_UP_ACTION } from "../utils/constants";
 import { toast } from "react-toastify";
 
 const signup = async (requestBody, dispatcher) => {
@@ -10,7 +11,7 @@ const signup = async (requestBody, dispatcher) => {
     });
     localStorage.setItem("token", response.data.encodedToken);
     dispatcher({
-      type: "SIGNUP",
+      type: SIGN_UP_ACTION,
       payload: {
         user: response.data.createdUser,
         token: response.data.encodedToken,
@@ -20,7 +21,7 @@ const signup = async (requestBody, dispatcher) => {
     return "SUCCESS";
   } catch (e) {
     console.log(e);
-    toast.error("Was that a thud in the server room!?");
+    toast.error("Something's not right in the server room!");
     return "FAILED";
   }
 };
@@ -35,7 +36,7 @@ const login = async (requestBody, dispatcher) => {
     });
     localStorage.setItem("token", response.data.encodedToken);
     dispatcher({
-      type: "LOGIN",
+      type: LOGIN_ACTION,
       payload: {
         user: response.data.foundUser,
         token: response.data.encodedToken,
@@ -45,7 +46,7 @@ const login = async (requestBody, dispatcher) => {
     return "SUCCESS";
   } catch (e) {
     console.error(e);
-    toast.error("Was that a thud in the server room!?");
+    toast.error("Wrong credentials!");
     return "FAILED";
   }
 };
@@ -57,7 +58,7 @@ const fetchUserDetails = async (token, dispatcher) => {
       url: "/api/auth/user",
       headers: { authorization: token },
     });
-    dispatcher({ type: "USER", payload: { user: response.data.user } });
+    dispatcher({ type: USER_ACTION, payload: { user: response.data.user } });
   } catch (e) {
     console.log(e);
   }

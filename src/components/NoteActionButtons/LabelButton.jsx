@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { MdLabel } from "../../icons";
+import { MdLabel } from "../../utils/icons";
 import { FormInput } from "../index";
-import { getRandomColor, isBright } from "../helpers";
+import { getRandomColor, isBright } from "../../utils/helpers";
 import { toast } from "react-toastify";
+import {
+  ADD_LABEL_ACTION,
+  REMOVE_LABEL_ACTION,
+  LABEL_TOGGLE_ACTION,
+} from "../../utils/constants";
 
 function LabelButton({ brightness, labels, labelToggle, dispatch }) {
   const [labelText, setLabelText] = useState("");
@@ -25,7 +30,7 @@ function LabelButton({ brightness, labels, labelToggle, dispatch }) {
     }
 
     dispatch({
-      type: "ADD_LABEL",
+      type: ADD_LABEL_ACTION,
       payload: { label: { text: labelText, color: getRandomColor() } },
     });
 
@@ -38,7 +43,7 @@ function LabelButton({ brightness, labels, labelToggle, dispatch }) {
         className={`${brightness ? "text-black" : "text-white"} ${
           labelToggle && "bg-slate-500"
         } text-3xl md:text-4xl p-1 rounded-md hover:bg-slate-500 `}
-        onClick={() => dispatch({ type: "LABEL_TOGGLE" })}
+        onClick={() => dispatch({ type: LABEL_TOGGLE_ACTION })}
       />
       <p className="absolute -top-1 -right-1 bg-slate-600 rounded-full p-1 px-1.5 text-white font-medium text-xs">
         {labels.length}
@@ -62,7 +67,7 @@ function LabelButton({ brightness, labels, labelToggle, dispatch }) {
                 <span
                   onClick={() =>
                     dispatch({
-                      type: "REMOVE_LABEL",
+                      type: REMOVE_LABEL_ACTION,
                       payload: { label: label },
                     })
                   }

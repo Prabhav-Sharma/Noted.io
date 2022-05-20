@@ -1,113 +1,107 @@
-import React, { useState } from "react";
-import {
-  FaHome,
-  FaTrash,
-  GiPlagueDoctorProfile,
-  MdArchive,
-  ImSearch,
-} from "../icons";
-import { Archives, Notes, Trash, Search, Profile } from "../components";
-import { addToNotes } from "../services";
+import React, { useEffect } from "react";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useUserData } from "../contexts/providers/userDataProvider";
-import { getRandomColor } from "../components/helpers";
+import { BsPinFill, GiNotebook, BiSort } from "../utils/icons";
+import { addToNotes, fetchNotes } from "../services";
+import { getRandomColor, sortNotes } from "../utils/helpers";
+import { NoteCard } from "../components";
+import { useToggle, useDocumentTitle } from "../Hooks";
 
 function Home() {
   const {
+    userDataState: { notes },
+    userDataDispatch,
+  } = useUserData();
+
+  const {
     authState: { token },
   } = useAuth();
-  const { userDataDispatch } = useUserData();
 
-  const [{ display, content }, setContent] = useState({
-    display: "HOME",
-    content: <Notes />,
-  });
+  useDocumentTitle("Home");
 
-  const addNewNoteHandler = () => {
-    addToNotes(
-      {
-        note: {
-          title: "",
-          text: "<p><br></p>",
-          color: getRandomColor(),
-          pinned: false,
-          labels: [],
-          updatedAt: new Date(),
-        },
-      },
-      token,
-      userDataDispatch
+  const { toggle: sortByLatest, setToggle: setSortByLatest } = useToggle(true);
+
+  useEffect(() => {
+    (async () => {
+      const notes = await fetchNotes(token, userDataDispatch);
+      if (notes && notes.length === 0) {
+        addToNotes(
+          {
+            note: {
+              title: "",
+              text: "<p><br></p>",
+              color: getRandomColor(),
+              pinned: false,
+              labels: [],
+              updatedAt: new Date(),
+            },
+          },
+          token,
+          userDataDispatch
+        );
+      }
+    })();
+  }, []);
+
+  const PinnedSection = () => {
+    const pinnedNotes = sortNotes(
+      notes.filter((note) => note.pinned),
+      sortByLatest
     );
-    if (display !== "HOME") setContent({ display: "HOME", content: <Notes /> });
+    return (
+      pinnedNotes.length !== 0 && (
+        <>
+          <h2 className=" self-start flex gap-1 items-center text-xl ml-4 font-bold font-caveat sm:ml-6 sm:text-2xl lg:ml-24">
+            <BsPinFill /> Pinned Notes
+          </h2>
+          {pinnedNotes.map((note) => (
+            <NoteCard key={note._id} note={note} />
+          ))}
+        </>
+      )
+    );
   };
 
-  const tabButtonStyles =
-    "flex flex-row gap-2 text-lg sm:text-xl items-center text-black hover:text-cyan-700";
-  return (
-    <main className="flex flex-col gap-4 bg-indigo-50 sm:flex-row sm:p-1 max-w-full md:pt-6 sm:gap-6 md:gap-8 h-full">
-      <aside className="flex static bg-transparent sm:relative sm:rounded-xl left-1 sm:ml-8 sm:w-56 md:w-72 lg:w-80 sm:items-start sm:h-auto sm:gap-6 p-3 top-0 flex-col gap-2">
-        <button
-          className={`${tabButtonStyles} ${
-            display === "HOME" && "text-cyan-700"
-          }`}
-          onClick={() =>
-            setContent({
-              display: "HOME",
-              content: <Notes />,
-            })
-          }
-        >
-          <FaHome className="align-sub text-xl" /> Home
-        </button>
+  const AllSection = () => {
+    const allNotes = sortNotes(
+      notes.filter((note) => !note.pinned),
+      sortByLatest
+    );
+    return (
+      allNotes.length !== 0 && (
+        <>
+          <h2 className="self-start flex gap-2 items-center text-xl ml-4 font-bold font-caveat sm:ml-10 sm:text-2xl md:ml-16 lg:ml-24">
+            <GiNotebook /> All Notes
+          </h2>
+          {allNotes.map((note) => (
+            <NoteCard key={note._id} note={note} type="HOME" />
+          ))}
+        </>
+      )
+    );
+  };
 
+  return (
+    <section className="flex-grow flex flex-col gap-4 items-center m-0">
+      <span className="flex justify-between w-11/12 items-center">
+        <h1 className="text-2xl pl-2 font-bold font-caveat sm:pl-6 sm:text-3xl md:pl-10">
+          Notes
+        </h1>
         <button
-          className={`${tabButtonStyles} ${
-            display === "ARCHIVES" && "text-cyan-700"
-          }`}
-          onClick={() =>
-            setContent({
-              display: "ARCHIVES",
-              content: <Archives />,
-            })
-          }
+          onClick={() => setSortByLatest((c) => !c)}
+          className="text-sm sm:text-base -translate-x-6 lg:-translate-x-14 flex items-center translate-y-5 p-1.5 w-28 justify-center text-white rounded-md bg-rose-500 shadow shadow-black hover:bg-rose-600"
         >
-          <MdArchive className="align-sub text-xl" /> Archives
+          Sort <BiSort />: {sortByLatest === true ? "Latest" : "Oldest"}
         </button>
-        <button
-          className={`${tabButtonStyles} ${
-            display === "TRASH" && "text-cyan-700"
-          }`}
-          onClick={() => setContent({ display: "TRASH", content: <Trash /> })}
-        >
-          <FaTrash className="align-sub text-lg" /> Trash
-        </button>
-        <button
-          className={`${tabButtonStyles} ${
-            display === "SEARCH" && "text-cyan-700"
-          }`}
-          onClick={() => setContent({ display: "SEARCH", content: <Search /> })}
-        >
-          <ImSearch className="align-sub text-xl" /> Search
-        </button>
-        <button
-          className={`${tabButtonStyles} ${
-            display === "PROFILE" && "text-cyan-700"
-          }`}
-          onClick={() =>
-            setContent({ display: "PROFILE", content: <Profile /> })
-          }
-        >
-          <GiPlagueDoctorProfile className="align-sub text-xl" /> Profile
-        </button>
-        <button
-          onClick={addNewNoteHandler}
-          className="p-3 w-48 text-sm sm:w-44 lg:text-xl lg:w-48 sm:text-lg ease-in-out font-notoSans font-light hover:bg-cyan-600 bg-cyan-500 rounded-lg text-white"
-        >
-          Create new note
-        </button>
-      </aside>
-      {content}
-    </main>
+      </span>
+      <PinnedSection />
+      <AllSection />
+      {notes.length === 0 && (
+        <h3 className="text-base mt-10 font-bold sm:text-xl md:text-2xl font-caveat">
+          Create a note to get started ^_^
+        </h3>
+      )}
+    </section>
   );
 }
 

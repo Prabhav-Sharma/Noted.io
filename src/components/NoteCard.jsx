@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useMemo, useRef } from "react";
-import { BsPinFill } from "../icons";
+import { BsPinFill } from "../utils/icons";
 import {
   ColorButton,
   LabelButton,
@@ -7,8 +7,9 @@ import {
   ArchiveButton,
   SaveButton,
 } from "../components";
-import { noteReducer, isBright } from "./helpers";
+import { noteReducer, isBright } from "../utils/helpers";
 import { useNavigate } from "react-router-dom";
+import { SAVE_TOGGLE_ACTION, PINNED_ACTION } from "../utils/constants";
 import DOMPurify from "dompurify";
 
 function NoteCard({ note, type = "HOME" }) {
@@ -33,7 +34,10 @@ function NoteCard({ note, type = "HOME" }) {
 
   useEffect(() => {
     let noteChanged = JSON.stringify(state.note) !== JSON.stringify(note);
-    dispatch({ type: "SAVE_TOGGLE", payload: { saveToggle: noteChanged } });
+    dispatch({
+      type: SAVE_TOGGLE_ACTION,
+      payload: { saveToggle: noteChanged },
+    });
   }, [state.note]);
 
   return (
@@ -48,13 +52,13 @@ function NoteCard({ note, type = "HOME" }) {
       }}
     >
       <h3
-        className="font-neuton text-xl md:text-2xl font-medium"
+        className="md:text-xl font-normal"
         onClick={() => navigate(`/note/${type}/${_id}`)}
       >
         {title || "New Note"}
       </h3>
       <p
-        className="line-clamp-5 text-sm md:text-base font-notoSans font-normal"
+        className="line-clamp-5 text-sm md:text-base font-normal"
         onClick={() => navigate(`/note/${type}/${_id}`)}
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(
@@ -84,7 +88,7 @@ function NoteCard({ note, type = "HOME" }) {
       {type === "HOME" && (
         <button>
           <BsPinFill
-            onClick={() => dispatch({ type: "PINNED" })}
+            onClick={() => dispatch({ type: PINNED_ACTION })}
             className={`${brightness ? "text-black" : "text-white"}  ${
               pinned && "bg-slate-600"
             } text-2xl md:text-3xl absolute rounded-md top-2 right-2 p-1 hover:bg-slate-500 `}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth } from "../../contexts/providers/AuthProvider";
 import { useUserData } from "../../contexts/providers/userDataProvider";
-import { FaSave, IoMdTrash } from "../../icons";
+import { FaSave, IoMdTrash } from "../../utils/icons";
 import { restoreFromTrash, addToTrash, removeFromTrash } from "../../services";
 
 function DeleteButton({ type, note, brightness, addFunctions = undefined }) {

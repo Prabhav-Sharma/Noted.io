@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { useAuth } from "../contexts/providers/AuthProvider";
 import { useUserData } from "../contexts/providers/userDataProvider";
 import { fetchArchives } from "../services";
-import { MdArchive } from "../icons";
-import NoteCard from "./NoteCard";
+import { MdArchive } from "../utils/icons";
+import { NoteCard } from "../components";
+import { useDocumentTitle } from "../Hooks";
 
 function Archives() {
   const {
@@ -14,6 +15,8 @@ function Archives() {
   const {
     authState: { token },
   } = useAuth();
+
+  useDocumentTitle("Archives");
 
   useEffect(() => {
     fetchArchives(token, userDataDispatch);
