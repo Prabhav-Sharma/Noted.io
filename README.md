@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# [Noted.io](https://notedio.netlify.app/)
+A notes app built using ReactJS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The app allows you to write and manage notes in an organised and efficient manner
 
-## Available Scripts
+## Screens
+![chrome-capture-2022-4-21 (1)](https://user-images.githubusercontent.com/88072012/169648239-950b9b77-1696-4d30-b79e-14a7f6e407ae.gif)
 
-In the project directory, you can run:
+## Features
+### Authentication 
+- Authentication allows the user to login/signup into the app to unlock personalized features.
+- Redirects user to login page, if an attempt is made to navigate to protected pages which require the user to be authenticated.
+- Authentication is achieved by using an encoded token so as to not publicize user data.
 
-### `yarn start`
+### Home
+- The user can view all their notes that are not deleted or archvied.
+- They can sort their notes either by most recently updated or otherwise. 
+- The user can pin notes at the top.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Archives
+- All the notes that the user has archived will be easily accessible from here.
+- The user can perform all notes operations on the archived notes.
+- They can recover notes which will add them back to the home notes.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Trash
+- The user can view all the notes they've added to trash or deleted from either the home page or the archives page.
+- The notes can be recovered from here, which will add them back to the home notes.
+- Added as a security against accidently deleting notes. 
+- The user can't make changes to the notes from here before recovering them first.
+- The user can permanently delete the notes.
 
-### `yarn test`
+### Search
+- The user can search for a specific query in all the notes.
+- They can either search for a query in the title of the notes, the labels or the text in the notes.
+- They can perform the operations on each type of note in the same manner as on their specific pages.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Profile Page
+- The profile page lists the information of the user such as their full name, email, the date the account was created on.
+- The user's stats such as the total number of notes in each category are counted and shown. 
+- The total number of characters in all notes combined are also shown here.
 
-### `yarn build`
+### Note
+- The user can edit the contents of the note such as note's title and content.
+- Depending on the notes origin, certain buttons will be shown to perform note actions. For example, if the note is from the home section, it will have the option to archive or delete the note. If the note is from archives, it can be recovered or deleted, and finally, if the notes is from trash then the note can't be edited but only be recovered or permanently deleted.
+- The note's labels can be viewed.
+- Rich text editing, can also include images.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Worthy inclusions
+### The note color
+Depending on the note's color decided by the user, the note's text color will be calculated by a function that checks if the note color is bright or dark. If it's bright then the text-color will be black, and vice-versa.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### The Save Button
+The save button continously checks the current note's editable state and the note that was loaded from the database. If there are any net changes, the save button appears on the note that allows the user to save these changes.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This is done to ensure that too many API calls are not fired, the user may not be done with the changes or may end up deciding that they don't want to save the changes after all. 
